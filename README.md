@@ -12,7 +12,7 @@ Written by Aun.
 
 [Decal](https://decaldev.com/) 2.9.8.3 required.
 
-Download the latest installer:  [Download Aunberean](https://github.com/aunrela/Aunberean/releases/download/)
+Download the latest installer:  [Download Aunberean](https://github.com/aunrela/Aunberean/releases/download/V0.0.1.0/AunbereanInstaller-0.0.1.exe)
 
 To upgrade from a previous version, just download and re-run the .exe file.
 
