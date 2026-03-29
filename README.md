@@ -24,7 +24,7 @@ To upgrade from a previous version, just download and re-run the .exe file.
 
 Shows select buffs above the health bar and all debuffs bellow. 
 
-Shows when max hp has been reduced with a hashed out portion.
+Shows when max hp/stamina/mana has been reduced with a hashed out portion.
 
 Hold control to move and resize.
 
@@ -40,7 +40,7 @@ Aetheria icons:
 
 
 Currently tracks:
-- Hosino
+- Hoshino
 - Tou-Tou
 - Rynthid
 - Viridian Rise
@@ -51,14 +51,14 @@ Currently tracks:
 
 Points to closest mob and marks mobs needed with a green arrow.
 
-Clicking on the mob name selects the closest mob if the task is in progress or slects the NPC if the quest is ready for turn in or not started.
+Clicking on the mob name selects the closest mob if the task is in progress, or selects the NPC if the quest is ready for turn in or not started.
 
 ## Corpse Transparency 
 
 ![Corpse Before](./docs/corpsebefore.png)
 ![Corpse After](./docs/corpseafter.png)
 
-Makes corpses that have been opened slightly transparent.
+Makes corpses that have been opened slightly transparent. Level of transparency settable all the way to invisible
 
 ## Options
 
