@@ -406,9 +406,9 @@ namespace Aunberean
             var current = Game.Character.Weenie.Vitals[type].Current;
             var div = GetVitalNegativeMultiplierModifier(type);
             var sub = GetVitalNegativeAdditiveModifier(type);
-            var add = Game.Character.GetEnchantmentsAdditiveModifier(type);
-            var mul = Game.Character.GetEnchantmentsMultiplierModifier(type);
-            //var bas = (double)Game.Character.Weenie.Vitals[type].Base;
+            var add = GetVitalPositiveAdditiveModifier(type);
+            var mul = GetVitalPositiveMultiplierModifier(type);
+            //var bas = (double)Game.Character.Weenie.Vitals[type].Base ;
 
             max /= mul;
             max -= add;
@@ -439,11 +439,33 @@ namespace Aunberean
             return num;
         }
 
+        public float GetVitalPositiveMultiplierModifier(VitalId type)
+        {
+            float num = 1f;
+            foreach (UtilityBelt.Scripting.Interop.Enchantment item in from e in Game.Character.GetActiveEnchantments(type)
+                                                                       where (e.Flags & EnchantmentFlags.Multiplicative) != 0
+                                                                       && e.StatValue > 1.0f
+                                                                       select e)
+            {
+                num *= item.StatValue;
+            }
+
+            return num;
+        }
+
         public int GetVitalNegativeAdditiveModifier(VitalId type)
         {
             return (from e in Game.Character.GetActiveEnchantments(type)
                     where (e.Flags & EnchantmentFlags.Additive) != 0
                     && e.StatValue < 0.0f
+                    select e).Sum((UtilityBelt.Scripting.Interop.Enchantment e) => (int)e.StatValue);
+        }
+
+        public int GetVitalPositiveAdditiveModifier(VitalId type)
+        {
+            return (from e in Game.Character.GetActiveEnchantments(type)
+                    where (e.Flags & EnchantmentFlags.Additive) != 0
+                    && e.StatValue > 0.0f
                     select e).Sum((UtilityBelt.Scripting.Interop.Enchantment e) => (int)e.StatValue);
         }
 
