@@ -14,6 +14,8 @@ Written by Aun.
 
 Download the latest installer:  [Download Aunberean](https://github.com/aunrela/Aunberean/releases/download/V0.0.1.0/AunbereanInstaller-0.0.1.exe)
 
+Download this updated beta UtilityBelt: [UtilityBelt](https://gitlab.com/utilitybelt/utilitybelt.gitlab.io/-/package_files/278865008/download)
+
 To upgrade from a previous version, just download and re-run the .exe file.
 
 ## Vital Bar
