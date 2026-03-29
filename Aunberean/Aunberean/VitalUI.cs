@@ -404,11 +404,20 @@ namespace Aunberean
             var max = (double)Game.Character.Weenie.Vitals[type].Max;
             var maxDisplay = max;
             var current = Game.Character.Weenie.Vitals[type].Current;
-            var multi = GetVitalNegativeMultiplierModifier(type);
+            var div = GetVitalNegativeMultiplierModifier(type);
             var sub = GetVitalNegativeAdditiveModifier(type);
+            var add = Game.Character.GetEnchantmentsAdditiveModifier(type);
+            var mul = Game.Character.GetEnchantmentsMultiplierModifier(type);
+            //var bas = (double)Game.Character.Weenie.Vitals[type].Base;
+
+            max /= mul;
+            max -= add;
 
             max -= sub;
-            max /= multi;
+            max /= div;
+
+            max *= mul;
+            max += add;
 
             var divisor = maxDisplay / max;
 
