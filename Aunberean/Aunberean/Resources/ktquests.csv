@@ -27,6 +27,7 @@ Graveyard,Graveyard Skeletons,KilltaskGraveyardSkeletonWait_1309 ,KilltaskGravey
 Graveyard,Graveyard Wights,KilltaskGraveyardWightWait_1309 ,KilltaskGraveyardWight_1309 ,0,30,,51958
 Graveyard,Graveyard Spirits,KilltaskGraveyardSpiritWait_1309 ,KilltaskGraveyardSpirit_1309 ,0,10,,51956
 Graveyard,Grave Rats,KilltaskGraveyardGraveRatWait_1107 ,KilltaskGraveyardGraveRat_1107 ,0,100,,36236
+Graveyard,Guardian Statues,KillTaskGuardianStatueWait,KillTaskGuardianStatue,0,10,,42030
 Viridian Rise,Zefir Thorns,KilltaskViridianZefirWait ,KilltaskViridianZefir ,0,10,,53283
 Viridian Rise,Brier Wasps,KilltaskViridianWaspWait ,KilltaskViridianWasp ,0,10,,53281
 Viridian Rise,A'nekshens,KilltaskViridianAnekWait ,KilltaskViridianAnek ,0,10,,53280
@@ -50,3 +51,8 @@ Frozen Valley,Frost Golems,FrostGolemKillTask,frostgolemkillcount,0,20,,51959
 Frozen Valley,Frozen Dreads,FrozenDreadKillTask,frozendreadkillcount,0,10,,51960
 Frozen Valley,Frozen Crystals,FrozenCrystalKillTask,frozencrystalkillcount,0,4,,52286
 Frozen Valley,Frozen Wights,FrozenWightKillTask ,frozenwightkillcount ,0,20,,51961
+Neftet,reedsharks,KilltaskDesertAreaReedsharkWait_0511,KilltaskDesertAreaReedshark_0511,0,30,,44263
+Neftet,mumiyahs,KilltaskDesertAreaMumiyahWait_0511,KilltaskDesertAreaMumiyah_0511,0,30,,44262
+Neftet,golems,KilltaskDesertAreaGolemWait_0511,KilltaskDesertAreaGolem_0511,0,15,,44261
+Neftet,armoredillos,KilltaskDesertAreaArmoredilloWait_0511,KilltaskDesertAreaArmoredillo_0511,0,30,,44260
+Neftet,Desert Cactuss,DesertCactusKillTask,desertcactuskillcount,0,6,,52289

@@ -119,6 +119,25 @@ namespace Aunberean
             { "A'nekshen Tenders", "A'nekshens"},
             { "A'nekshen Caretaker", "A'nekshens"},
 
+            { "War Reapers", "reedsharks"},
+            { "Reedshark Seekers", "reedsharks"},
+            { "Tamed Reapers", "reedsharks"},
+            { "Reedshark Hunters", "reedsharks"},
+            { "Mu-miyah Viziers", "mumiyahs"},
+            { "Mu-miyah Lords", "mumiyahs"},
+            { "Mu-miyah Soldiers", "mumiyahs"},
+            { "Mu-miyah Champions", "mumiyahs"},
+            { "Mu-miyah Guardians", "mumiyahs"},
+            { "Mu-miyah Channellers", "mumiyahs"},
+            { "Mu-miyah Soothsayers", "mumiyahs"},
+            { "Mu-miyah Sentinels", "mumiyahs"},
+            { "Mu-miyah Grand Viziers", "mumiyahs"},
+            { "Burning Sands Golems", "golems"},
+            { "Dust Golems", "golems"},
+            { "War Armoredillos", "armoredillos"},
+            { "Tamed Armoredillos", "armoredillos"},
+            { "Guardian Armoredillos", "armoredillos"},
+
         };
 
         Dictionary<string, List<string>> reverseDict = ktdict
@@ -210,6 +229,11 @@ namespace Aunberean
                     if (ImGui.BeginTabItem("Frozen Valley"))
                     {
                         drawTab("Frozen Valley");
+                        ImGui.EndTabItem();
+                    }
+                    if (ImGui.BeginTabItem("Neftet"))
+                    {
+                        drawTab("Neftet");
                         ImGui.EndTabItem();
                     }
                     ImGui.EndTabBar();
