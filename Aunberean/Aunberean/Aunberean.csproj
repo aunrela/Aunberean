@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <OutputType>Library</OutputType>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <OutputPath>..\bin\</OutputPath>
+    <PlatformTarget>x86</PlatformTarget>
+    <Version>0.0.1</Version>
+    <LangVersion>12</LangVersion>
+    <GenerateAssemblyInfo>True</GenerateAssemblyInfo>
+    <ProjectGuid>b36b9980-6cf8-4ea9-b324-eb161b301e49</ProjectGuid>
+    <RootNamespace>Aunberean</RootNamespace>
+    <AssemblyName>Aunberean</AssemblyName>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Resources\060011FA.png" />
+    <None Remove="Resources\arrow-up-inv.png" />
+    <None Remove="Resources\greenAetheria.png" />
+    <None Remove="Resources\hashmarks.png" />
+    <None Remove="Resources\ktquests.csv" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="D3DService">
+      <VersionMinor>0</VersionMinor>
+      <VersionMajor>1</VersionMajor>
+      <Guid>8f6ef6ad-e982-40a4-b6cc-79e80b77313b</Guid>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>false</Isolated>
+      <EmbedInteropTypes>true</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PluginCore.cs" />
+    <None Include="ExampleUI.cs" />
+    <Content Include="README.md" />
+    <Content Include="scripts\installer.nsi" />
+    <Content Include="scripts\post-build.ps1" />
+    <Content Include="deps\Decal.Adapter.dll" />
+    <Content Include="deps\Decal.Interop.Core.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\060011FA.png" />
+    <EmbeddedResource Include="Resources\arrow-up-inv.png" />
+    <EmbeddedResource Include="Resources\greenAetheria.png" />
+    <EmbeddedResource Include="Resources\hashmarks.png" />
+    <EmbeddedResource Include="Resources\ktquests.csv" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Decal.Adapter">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Decal 3.0\Decal.Adapter.dll</HintPath>
+    </Reference>
+    <Reference Include="Decal.FileService">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Decal 3.0\Decal.FileService.dll</HintPath>
+    </Reference>
+    <Reference Include="Decal.Interop.Core">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Decal 3.0\.NET 4.0 PIA\Decal.Interop.Core.DLL</HintPath>
+    </Reference>
+    <Reference Include="Decal.Interop.D3DService">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Decal 3.0\.NET 4.0 PIA\Decal.Interop.D3DService.DLL</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.DirectX.Direct3D">
+      <HintPath>..\deps\Microsoft.DirectX.Direct3D.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="NSIS-Tool" Version="3.0.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="UtilityBelt.Service" Version="3.0.14">
+      <ExcludeAssets>runtime; build;</ExcludeAssets>
+    </PackageReference>
+  </ItemGroup>
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="powershell -NoProfile -ExecutionPolicy Bypass -Command &quot;&amp; { &amp; '$(ProjectDir)scripts\post-build.ps1' -NuGetPackageRoot '$(NuGetPackageRoot)' -ProjectDir '$(ProjectDir)' }&quot;" />
+  </Target>
+</Project>
