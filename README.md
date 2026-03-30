@@ -18,6 +18,9 @@ Download this updated beta UtilityBelt: [UtilityBelt](https://gitlab.com/utility
 
 To upgrade from a previous version, just download and re-run the .exe file.
 
+If you accidentaly click DisableAllRendering in the UtilityBelt Service menu, delete the settings file at 
+C:\Games\DecalPlugins\UtilityBelt.Service\settings\ubservice.settings.json
+
 ## Vital Bar
 
 ![Vital Bar Simple](./docs/vitalbarsimple.png)
