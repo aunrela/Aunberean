@@ -81,6 +81,7 @@ namespace Aunberean
             { "Rift of Blind Rages", "Rynthid Rifts" },
             { "Rift of Consuming Torments", "Rynthid Rifts" },
             { "Rift of Torments", "Rynthid Rifts" },
+            { "Rift of Rages", "Rynthid Rifts" },
             { "Rynthid Berserkers", "Rynthid Rare Boss" },
             { "Rynthid Ravagers", "Rynthid Rare Boss" },
             { "Aspect of Rages", "Rynthid Rare Boss" },
@@ -119,24 +120,28 @@ namespace Aunberean
             { "A'nekshen Tenders", "A'nekshens"},
             { "A'nekshen Caretaker", "A'nekshens"},
 
-            { "War Reapers", "reedsharks"},
-            { "Reedshark Seekers", "reedsharks"},
-            { "Tamed Reapers", "reedsharks"},
-            { "Reedshark Hunters", "reedsharks"},
-            { "Mu-miyah Viziers", "mumiyahs"},
-            { "Mu-miyah Lords", "mumiyahs"},
-            { "Mu-miyah Soldiers", "mumiyahs"},
-            { "Mu-miyah Champions", "mumiyahs"},
-            { "Mu-miyah Guardians", "mumiyahs"},
-            { "Mu-miyah Channellers", "mumiyahs"},
-            { "Mu-miyah Soothsayers", "mumiyahs"},
-            { "Mu-miyah Sentinels", "mumiyahs"},
-            { "Mu-miyah Grand Viziers", "mumiyahs"},
-            { "Burning Sands Golems", "golems"},
-            { "Dust Golems", "golems"},
-            { "War Armoredillos", "armoredillos"},
-            { "Tamed Armoredillos", "armoredillos"},
-            { "Guardian Armoredillos", "armoredillos"},
+            { "War Reapers", "Reedsharks"},
+            { "Reedshark Seekers", "Reedsharks"},
+            { "Tamed Reapers", "Reedsharks"},
+            { "Reedshark Hunters", "Reedsharks"},
+            { "reedsharks", "Reedsharks"},
+            { "Mu-miyah Viziers", "Mumiyahs"},
+            { "Mu-miyah Lords", "Mumiyahs"},
+            { "Mu-miyah Soldiers", "Mumiyahs"},
+            { "Mu-miyah Champions", "Mumiyahs"},
+            { "Mu-miyah Guardians", "Mumiyahs"},
+            { "Mu-miyah Channellers", "Mumiyahs"},
+            { "Mu-miyah Soothsayers", "Mumiyahs"},
+            { "Mu-miyah Sentinels", "Mumiyahs"},
+            { "Mu-miyah Grand Viziers", "Mumiyahs"},
+            { "mumiyahs", "Mumiyahs"},
+            { "Burning Sands Golems", "Golems"},
+            { "Dust Golems", "Golems"},
+            { "golems", "Golems"},
+            { "War Armoredillos", "Armoredillos"},
+            { "Tamed Armoredillos", "Armoredillos"},
+            { "Guardian Armoredillos", "Armoredillos"},
+            { "armoredillos", "Armoredillos"},
 
         };
 
@@ -169,7 +174,7 @@ namespace Aunberean
             _plugin = plugin;
             
             hud = UBService.Huds.CreateHud("Killtask Tracker");
-            //hud.WindowSettings = ImGuiWindowFlags.NoNavFocus;
+            //hud.WindowSettings = ImGuiWindowFlags.NoNavFocus | ImGuiWindowFlags.NoNavInputs;
             hud.DontDrawDefaultWindow = true;
             hud.ShowInBar = true;
             hud.OnRender += Hud_OnRender;
@@ -197,7 +202,7 @@ namespace Aunberean
                     new Vector2(450, 700)   // max size
                 );
 
-                ImGui.Begin("Kill task Tracker" + "###" + "Kill task Tracker", ref windowIsOpen, ImGuiWindowFlags.NoNavFocus);
+                ImGui.Begin("Kill task tracker" + "###" + "Kill task tracker", ref windowIsOpen, ImGuiWindowFlags.NoNavFocus);
 
                 if (ImGui.BeginTabBar("Kill Tasks"))
                 {
@@ -601,6 +606,8 @@ namespace Aunberean
                         {
                             KtQuest.KtQuests[index2].UpdateSolves(count);
                         }
+
+
                         List<string> mobs = new List<string>();
                         mobs.Add(name);
                         if (reverseDict.ContainsKey(name))
@@ -608,12 +615,12 @@ namespace Aunberean
                             mobs.AddRange(reverseDict[name]);
                         }
                         
-
                         foreach(var mob in mobs)
                         {
                             string minuss = mob.Substring(0, mob.Length - 1);
                             deleteShapesByMob(minuss);
                         }
+                        //if(_plugin.ktHideMessages.Value) e.Eat = true;
                     }
                 }
 
@@ -635,7 +642,7 @@ namespace Aunberean
                         {
                             KtQuest.KtQuests[index2].UpdateSolves(firstNumber);
                         }
-
+                        //if (_plugin.ktHideMessages.Value) e.Eat = true;
                     }
                 }
 
@@ -660,7 +667,7 @@ namespace Aunberean
                         {
                             KtQuest.KtQuests[index2].UpdateSolves(firstNumber);
                         }
-
+                        //if (_plugin.ktHideMessages.Value) e.Eat = true;
                     }
                 }
                 

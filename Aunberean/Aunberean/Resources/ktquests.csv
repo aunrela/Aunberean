@@ -14,23 +14,23 @@ Tou-Tou,Void Lords,KillTaskTouTouKnightsCompleted0812,KillTaskTouTouKnights0812,
 Tou-Tou,Panumbris Shadows,KillTaskTouTouShadowsCompleted0812,KillTaskTouTouShadows0812,0,25,,46017
 Tou-Tou,Shadow Flyers,KillTaskTouTouFlyersCompleted0812,KillTaskTouTouFlyers0812,0,15,,46014
 Tou-Tou,Devourer Marguls,KillTaskTouTouMargulsCompleted0812,KillTaskTouTouMarguls0812,0,15,,46016
-Rynthid,Rynthid Sorcerers,KillTaskRynthidSorcererCompleted0813 ,KillTaskRynthidSorcerers0813 ,0,15,,51865
-Rynthid,Rynthid Rifts,KillTaskRynthidRiftCompleted0813 ,KillTaskRynthidRifts0813 ,0,10,,51866
-Rynthid,Rynthid Minions,KillTaskRynthidMinionsCompleted0813 ,KillTaskRynthidMinions0813 ,0,25,,51862
-Rynthid,Rynthid Slayers,KillTaskRynthidSlayerCompleted0813 ,KillTaskRynthidSlayers0813 ,0,15,,51863
-Rynthid,Rynthid Rare Boss,KillTaskRynthidRaresCompleted0813 ,KillTaskRynthidRares0813 ,0,1,,51861
-Rynthid,Rynthid Empowered Wisps,KillTaskRynthidWispsCompleted0813 ,KillTaskRynthidWisps0813 ,0,3,,51860
-Rynthid,Rynthid Crystals,KillTaskRynthidCrystalsWait ,KillTaskRynthidCrystals ,0,6,,52281
-Rynthid,Rynthid Ragers,KillTaskRynthidRagerCompleted0813 ,KillTaskRynthidRagers0813 ,0,15,,51864
-Graveyard,Graveyard Wisps,KilltaskGraveyardWispWait_1309 ,KilltaskGraveyardWisp_1309 ,0,5,,51955
-Graveyard,Graveyard Skeletons,KilltaskGraveyardSkeletonWait_1309 ,KilltaskGraveyardSkeleton_1309 ,0,30,,51957
-Graveyard,Graveyard Wights,KilltaskGraveyardWightWait_1309 ,KilltaskGraveyardWight_1309 ,0,30,,51958
-Graveyard,Graveyard Spirits,KilltaskGraveyardSpiritWait_1309 ,KilltaskGraveyardSpirit_1309 ,0,10,,51956
-Graveyard,Grave Rats,KilltaskGraveyardGraveRatWait_1107 ,KilltaskGraveyardGraveRat_1107 ,0,100,,36236
+Rynthid,Rynthid Sorcerers,KillTaskRynthidSorcererCompleted0813,KillTaskRynthidSorcerers0813,0,15,,51865
+Rynthid,Rynthid Rifts,KillTaskRynthidRiftCompleted0813,KillTaskRynthidRifts0813,0,10,,51866
+Rynthid,Rynthid Minions,KillTaskRynthidMinionsCompleted0813,KillTaskRynthidMinions0813,0,25,,51862
+Rynthid,Rynthid Slayers,KillTaskRynthidSlayerCompleted0813,KillTaskRynthidSlayers0813,0,15,,51863
+Rynthid,Rynthid Rare Boss,KillTaskRynthidRaresCompleted0813,KillTaskRynthidRares0813,0,1,,51861
+Rynthid,Rynthid Empowered Wisps,KillTaskRynthidWispsCompleted0813,KillTaskRynthidWisps0813,0,3,,51860
+Rynthid,Rynthid Crystals,KillTaskRynthidCrystalsWait,KillTaskRynthidCrystals,0,6,,52281
+Rynthid,Rynthid Ragers,KillTaskRynthidRagerCompleted0813,KillTaskRynthidRagers0813,0,15,,51864
+Graveyard,Graveyard Wisps,KilltaskGraveyardWispWait_1309,KilltaskGraveyardWisp_1309,0,5,,51955
+Graveyard,Graveyard Skeletons,KilltaskGraveyardSkeletonWait_1309,KilltaskGraveyardSkeleton_1309,0,30,,51957
+Graveyard,Graveyard Wights,KilltaskGraveyardWightWait_1309,KilltaskGraveyardWight_1309,0,30,,51958
+Graveyard,Graveyard Spirits,KilltaskGraveyardSpiritWait_1309,KilltaskGraveyardSpirit_1309,0,10,,51956
+Graveyard,Grave Rats,KilltaskGraveyardGraveRatWait_1107,KilltaskGraveyardGraveRat_1107,0,100,,36236
 Graveyard,Guardian Statues,KillTaskGuardianStatueWait,KillTaskGuardianStatue,0,10,,42030
-Viridian Rise,Zefir Thorns,KilltaskViridianZefirWait ,KilltaskViridianZefir ,0,10,,53283
-Viridian Rise,Brier Wasps,KilltaskViridianWaspWait ,KilltaskViridianWasp ,0,10,,53281
-Viridian Rise,A'nekshens,KilltaskViridianAnekWait ,KilltaskViridianAnek ,0,10,,53280
+Viridian Rise,Zefir Thorns,KilltaskViridianZefirWait,KilltaskViridianZefir,0,10,,53283
+Viridian Rise,Brier Wasps,KilltaskViridianWaspWait,KilltaskViridianWasp,0,10,,53281
+Viridian Rise,A'nekshens,KilltaskViridianAnekWait,KilltaskViridianAnek,0,10,,53280
 Viridian Rise,NightBrier,pickupNightBrierEssence,,0,1,,
 Viridian Rise,Wind Fury,pickupWindFuryEssence,,0,1,,
 Viridian Rise,Norshuntyr,pickupNorshuntyrEssence,,0,1,,
@@ -41,7 +41,7 @@ Viridian Rise,Portal 3-4 Reward,recivedrewardstatue3-4,,12,1,,
 Viridian Rise,Portal 4-5 Reward,recivedrewardstatue4-5,,14,1,,
 Viridian Rise,Portal 5-6 Reward,recivedrewardstatue5-6,,16,1,,
 Viridian Rise,Portal 6-7 Reward,recivedrewardstatue6-7,,20,1,,
-Frozen Valley,Gurog Minions,KillTaskGurogMinionCompleted1110 ,KillTaskGurogMinion1110 ,0,20,,43495
+Frozen Valley,Gurog Minions,KillTaskGurogMinionCompleted1110,KillTaskGurogMinion1110,0,20,,43495
 Frozen Valley,Gurog Henchmans,KillTaskGurogHenchmanCompleted1110,KillTaskGurogHenchman1110,0,20,,43495
 Frozen Valley,Gurog Soldiers,KillTaskGurogSoldierCompleted1110,KillTaskGurogSoldier1110,0,20,,43495
 Frozen Valley,Snow Tuskers,SnowTuskerKillTask,snowtuskerkillcount,0,20,,43740
@@ -50,9 +50,9 @@ Frozen Valley,Snow Tusker Leaders,SnowTuskerKillLeaderTask,snowtuskerkillleaderc
 Frozen Valley,Frost Golems,FrostGolemKillTask,frostgolemkillcount,0,20,,51959
 Frozen Valley,Frozen Dreads,FrozenDreadKillTask,frozendreadkillcount,0,10,,51960
 Frozen Valley,Frozen Crystals,FrozenCrystalKillTask,frozencrystalkillcount,0,4,,52286
-Frozen Valley,Frozen Wights,FrozenWightKillTask ,frozenwightkillcount ,0,20,,51961
-Neftet,reedsharks,KilltaskDesertAreaReedsharkWait_0511,KilltaskDesertAreaReedshark_0511,0,30,,44263
-Neftet,mumiyahs,KilltaskDesertAreaMumiyahWait_0511,KilltaskDesertAreaMumiyah_0511,0,30,,44262
-Neftet,golems,KilltaskDesertAreaGolemWait_0511,KilltaskDesertAreaGolem_0511,0,15,,44261
-Neftet,armoredillos,KilltaskDesertAreaArmoredilloWait_0511,KilltaskDesertAreaArmoredillo_0511,0,30,,44260
+Frozen Valley,Frozen Wights,FrozenWightKillTask,frozenwightkillcount,0,20,,51961
+Neftet,Reedsharks,KilltaskDesertAreaReedsharkWait_0511,KilltaskDesertAreaReedshark_0511,0,30,,44263
+Neftet,Mumiyahs,KilltaskDesertAreaMumiyahWait_0511,KilltaskDesertAreaMumiyah_0511,0,30,,44262
+Neftet,Golems,KilltaskDesertAreaGolemWait_0511,KilltaskDesertAreaGolem_0511,0,15,,44261
+Neftet,Armoredillos,KilltaskDesertAreaArmoredilloWait_0511,KilltaskDesertAreaArmoredillo_0511,0,30,,44260
 Neftet,Desert Cactuss,DesertCactusKillTask,desertcactuskillcount,0,6,,52289

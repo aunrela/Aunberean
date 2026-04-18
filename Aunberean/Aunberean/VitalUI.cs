@@ -35,7 +35,7 @@ namespace Aunberean
 {
     public class VitalUI : IDisposable
     {
-        public readonly static Game Game = new();
+        private Game Game;
         private readonly Hud hud;
         PluginCore _plugin;
 
@@ -178,7 +178,7 @@ namespace Aunberean
             4208, // Spectral Flame
             4221, // Spectral Life Magic Mastery
             5023, // Spectral Two Handed Combat Mastery
-            5032, // Spectral Item Expertise
+            5024, // Spectral Item Expertise
             5168, // a spectacular view of the Mhoire lands
             5169, // a descent into the Mhoire catacombs
             5170, // a descent into the Mhoire catacombs
@@ -195,9 +195,10 @@ namespace Aunberean
 
         double enchantmentTime = 0;
 
-        public VitalUI(PluginCore plugin)
+        public VitalUI(PluginCore plugin, Game game)
         {
             _plugin = plugin;
+            Game = game;
 
             var assembly = Assembly.GetExecutingAssembly();
 
@@ -258,10 +259,11 @@ namespace Aunberean
             hud.OnRender += Hud_OnRender;
             hud.OnShow += Hud_OnShow;
             hud.OnHide += Hud_OnHide;
-            if (_plugin.vitalBar.Value) {
+            if (_plugin.vitalBar.Value)
+            {
                 hud.Visible = true;
             }
-            
+
         }
 
 
@@ -270,11 +272,11 @@ namespace Aunberean
         {
             try
             {
-                
+
                 var size = ImGui.GetContentRegionAvail();
                 if (size.X <= 0 || size.Y <= 0)
                     return;
-                
+
                 var io = ImGui.GetIO();
                 if (io.DisplaySize.X < 900 || io.DisplaySize.Y < 700)
                 {
@@ -292,7 +294,7 @@ namespace Aunberean
                 );
                 ImGui.SetNextWindowPos(new Vector2(_plugin.vitalPosX.Value, _plugin.vitalPosY.Value), ImGuiCond.FirstUseEver);
                 ImGui.SetNextWindowSize(new Vector2(_plugin.vitalSizeX.Value, _plugin.vitalSizeY.Value), ImGuiCond.FirstUseEver);
-                
+
                 ImGui.Begin("Vitals", hud.WindowSettings);
 
                 //var ween = Game.Character.Weenie;
@@ -304,7 +306,7 @@ namespace Aunberean
                 //}
                 healthmiddleTexture.Texture.Device.SetSamplerState(0, SamplerStageStates.AddressU, 1);
                 //middleTexture.Texture.Device.SetSamplerState(0, SamplerStageStates.AddressV, 1);
-                
+
                 SpellTable spellTable = ((FileService)CoreManager.Current.FileService).SpellTable;
 
                 //var SpellTable = UBService.PortalDat.ReadFromDat<ACE.DatLoader.FileTypes.SpellTable>(0x0E00000E);
@@ -314,10 +316,10 @@ namespace Aunberean
                 //}
 
                 var activeEnchantments = Game.Character.ActiveEnchantments();
-                
+
                 enchantmentTime = GetUnixTime();
 
-                foreach (var enchantment in activeEnchantments.OrderBy(x=>x.SpellId))
+                foreach (var enchantment in activeEnchantments.OrderBy(x => x.SpellId))
                 {
                     if (trackedSpells.Contains((uint)enchantment.SpellId))//||true)
                     {
@@ -330,7 +332,7 @@ namespace Aunberean
                             if (enchantment.SpellId == 5208) iconid = 100690956;// 0x6c08;//regen
                             if (enchantment.SpellId == 5206) iconid = 100690954;// 0x6c00;//prot
                             if (enchantment.SpellId == 5753) iconid = 0x7090;//cis
-                            
+
                             var recivedat = GetUnixTime(enchantment.ClientReceivedAt);
                             var ExpiresAt = recivedat + enchantment.Duration + enchantment.StartTime;
                             var timeRemaning = enchantment.Duration <= 0 ? -1 : ExpiresAt - enchantmentTime;
@@ -344,23 +346,51 @@ namespace Aunberean
                     }
                 }
 
+                if (_plugin.vitalBarCooldowns.Value)
+                {
+                    foreach (var cooldown in Game.Character.SharedCooldowns())
+                    {
+                        uint iconid = 0;
+                        if (cooldown.Id == 213) iconid = 29728;
+                        var itemWo = Game.World[cooldown.ObjectId];
+                        if (itemWo != null)
+                        {
+                            iconid = itemWo.DataValues[DataId.Icon];
+                        }
+
+                        if (iconid != 0)
+                        {
+                            var recivedat = GetUnixTime(cooldown.ClientReceivedAt);
+                            var ExpiresAt = recivedat + cooldown.Duration + cooldown.StartTime;
+                            var timeRemaning = cooldown.Duration <= 0 ? -1 : ExpiresAt - enchantmentTime;
+                            drawBuff((int)iconid, (int)timeRemaning, 0);
+
+                            ImGui.SameLine();
+                        }
+                    }
+                }
+                
+
                 var hp = GetVital(VitalId.Health);
                 var stamina = GetVital(VitalId.Stamina);
                 var mana = GetVital(VitalId.Mana);
 
                 float barWidth = ImGui.GetWindowSize().X - 10;
                 ImGui.SetCursorPos(new Vector2(0, 60));
-                if (_plugin.simpleVitalBar.Value) {
+                if (_plugin.simpleVitalBar.Value)
+                {
                     DrawSimpleBar(hp.maxDisplay, (float)hp.current, (float)hp.max, _plugin.hpBarColor.Value, hp.divisor, barWidth);
                     ImGui.SetCursorPos(new Vector2(0, 76));
 
-                    if (_plugin.sideBySideStaminaMana.Value) {
+                    if (_plugin.sideBySideStaminaMana.Value)
+                    {
                         DrawSimpleBar(stamina.maxDisplay, (float)stamina.current, (float)stamina.max, _plugin.staminaBarColor.Value, stamina.divisor, (barWidth / 2) - 1);
                         ImGui.SetCursorPos(new Vector2((barWidth / 2), 76));
-                        DrawSimpleBar(mana.maxDisplay, (float)mana.current, (float)mana.max, _plugin.manaBarColor.Value, mana.divisor, (barWidth/2)-1);
+                        DrawSimpleBar(mana.maxDisplay, (float)mana.current, (float)mana.max, _plugin.manaBarColor.Value, mana.divisor, (barWidth / 2) - 1);
                         ImGui.Dummy(new Vector2(32, 48));
                         ImGui.SetCursorPos(new Vector2(8, 76 + 16 + 3));
-                    } else
+                    }
+                    else
                     {
                         DrawSimpleBar(stamina.maxDisplay, (float)stamina.current, (float)stamina.max, _plugin.staminaBarColor.Value, stamina.divisor, barWidth);
                         ImGui.SetCursorPos(new Vector2(0, 76 + 16));
@@ -379,12 +409,13 @@ namespace Aunberean
                     {
                         drawHpBar(stamina.current, stamina.max, stamina.divisor, stamina.maxDisplay,
                                 staminabgstartTexture.TexturePtr, staminabgmiddleTexture.TexturePtr, staminabgendTexture.TexturePtr,
-                                staminastartTexture.TexturePtr, staminamiddleTexture.TexturePtr, staminaendTexture.TexturePtr, barWidth/2);
+                                staminastartTexture.TexturePtr, staminamiddleTexture.TexturePtr, staminaendTexture.TexturePtr, barWidth / 2);
                         ImGui.SetCursorPos(new Vector2(barWidth / 2, 76));
                         drawHpBar(mana.current, mana.max, mana.divisor, mana.maxDisplay,
                                     manabgstartTexture.TexturePtr, manabgmiddleTexture.TexturePtr, manabgendTexture.TexturePtr,
-                                    manastartTexture.TexturePtr, manamiddleTexture.TexturePtr, manaendTexture.TexturePtr, barWidth/2);
-                    } else
+                                    manastartTexture.TexturePtr, manamiddleTexture.TexturePtr, manaendTexture.TexturePtr, barWidth / 2);
+                    }
+                    else
                     {
                         drawHpBar(stamina.current, stamina.max, stamina.divisor, stamina.maxDisplay,
                             staminabgstartTexture.TexturePtr, staminabgmiddleTexture.TexturePtr, staminabgendTexture.TexturePtr,
@@ -394,7 +425,7 @@ namespace Aunberean
                                     manabgstartTexture.TexturePtr, manabgmiddleTexture.TexturePtr, manabgendTexture.TexturePtr,
                                     manastartTexture.TexturePtr, manamiddleTexture.TexturePtr, manaendTexture.TexturePtr, barWidth);
                     }
-                    
+
                 }
 
 
@@ -403,13 +434,14 @@ namespace Aunberean
                     if (enchantment.Duration == -1) continue;
                     if (enchantment.SpellId <= 0) continue;
                     Decal.Filters.Spell byId = spellTable.GetById((int)enchantment.SpellId);
+                    //if (enchantment.SpellId == (0x8000 | 213)) { CoreManager.Current.Actions.AddChatText("summ " + ((byId == null) ? "null" : " not null"), 1); }
                     if (byId == null) continue;
                     if (!byId.IsDebuff) continue;
 
                     var recivedat = GetUnixTime(enchantment.ClientReceivedAt);
                     var ExpiresAt = recivedat + enchantment.Duration + enchantment.StartTime;
                     var timeRemaning = enchantment.Duration <= 0 ? -1 : ExpiresAt - enchantmentTime;
-                    
+
                     drawBuff(byId.IconId, (int)timeRemaning, (int)enchantment.Power, Color.Red);
                     if (ImGui.IsItemHovered())
                     {
@@ -438,10 +470,9 @@ namespace Aunberean
         {
             var playerSystem = CPlayerSystem.GetPlayerSystem();
             if (playerSystem == null) return;
-            
+
             if (playerSystem->playerModule.PlayerModule.GetOption(PlayerOption.SideBySideVitals_PlayerOption) == 1)
             {
-                CoreManager.Current.Actions.AddChatText("was side side", 1);
                 var vit = CoreManager.Current.Actions.UIElementLookup((Decal.Adapter.Wrappers.UIElementType)0x100006D5);
                 if (vit != null)
                 {
@@ -501,7 +532,7 @@ namespace Aunberean
             return span.TotalSeconds;
         }
 
-        public (int current,int max,double divisor, string maxDisplay) GetVital(VitalId type)
+        public (int current, int max, double divisor, string maxDisplay) GetVital(VitalId type)
         {
             var max = (double)Game.Character.Weenie.Vitals[type].Max;
             var maxDisplay = max;
@@ -572,7 +603,7 @@ namespace Aunberean
         }
 
 
-        public void drawBuff(int IconId, int TimeRemaining,int Difficulty, Color replaceColor = default(Color))
+        public void drawBuff(int IconId, int TimeRemaining, int Difficulty, Color replaceColor = default(Color))
         {
             if (IconId < 100663296)
             {
@@ -596,7 +627,7 @@ namespace Aunberean
                 }
                 ImGui.SetCursorPos(curspos);
             }
-            
+
             if (icons.ContainsKey(IconId))
             {
 
@@ -615,7 +646,7 @@ namespace Aunberean
                     ImGui.Image(icons[IconId].TexturePtr, size3232);
                 }
             }
-            
+
             TimeSpan t = TimeSpan.FromSeconds(TimeRemaining);
             string text = $"{(int)t.TotalMinutes}:{t.Seconds:D2}";
             var textSize = ImGui.CalcTextSize(text);
@@ -655,6 +686,7 @@ namespace Aunberean
             ImGui.Text(text);
             ImGui.EndGroup();
         }
+        
         private void drawHpBar(double stat, double statmax, double reduction, string statmaxdisplay, IntPtr bgStart, IntPtr bgMiddle, IntPtr bgEnd, IntPtr start, IntPtr middle, IntPtr end, float width)
         {
 
@@ -683,7 +715,7 @@ namespace Aunberean
                 );
                 ImGui.SetCursorScreenPos(pos);
             }
-            
+
             ThreeSliceBar_Clipped(
                 statf,
                 new Vector2(width, 16),
@@ -755,7 +787,7 @@ namespace Aunberean
 
             ThreeSliceBar_Clipped(
                 statf,
-                new Vector2((windowsize.X - 10)/2, 16),
+                new Vector2((windowsize.X - 10) / 2, 16),
                 staminastartTexture.TexturePtr,
                 staminamiddleTexture.TexturePtr,
                 staminaendTexture.TexturePtr,
@@ -772,7 +804,7 @@ namespace Aunberean
             float cursorX2 = ImGui.GetCursorPosX();
 
             // Center text within the icon width
-            float offset2 = ((windowsize.X - 10)/2 - textSize2.X) * 0.5f;
+            float offset2 = ((windowsize.X - 10) / 2 - textSize2.X) * 0.5f;
             if (offset2 > 0)
             {
                 ImGui.SetCursorPosX(cursorX2 + offset2);
@@ -1009,7 +1041,7 @@ namespace Aunberean
             tintColor = 0xffFFffff;
 
 
-            
+
 
 
             // --- START SEGMENT ---
@@ -1131,7 +1163,7 @@ namespace Aunberean
                         new Vector2(0, 1),
                         new Vector2(0, -1)
                     };
-            
+
             foreach (var offseta in offsets)
             {
                 drawList.AddText(textPos + offseta, 0xFF000000, text);
@@ -1139,7 +1171,7 @@ namespace Aunberean
 
 
             drawList.AddText(textPos, 0xFFFFFFFF, text);
-            
+
         }
         void ReplaceWhite(Bitmap bmp, Color newColor)
         {
@@ -1348,7 +1380,7 @@ namespace Aunberean
         { hud.Visible = visibility; }
         public void Dispose()
         {
-            
+
             hud.Dispose();
 
             foreach (var icon in icons)

@@ -12,7 +12,7 @@ Written by Aun.
 
 [Decal](https://decaldev.com/) 2.9.8.3 required.
 
-Download the latest installer:  [Download Aunberean](https://github.com/aunrela/Aunberean/releases/download/V0.0.2/AunbereanInstaller-0.0.2.exe)
+Download the latest installer:  [Download Aunberean](https://github.com/aunrela/Aunberean/releases/download/V0.0.3.0/AunbereanInstaller-0.0.3.exe)
 
 Download this updated beta UtilityBelt: [UtilityBelt](https://gitlab.com/utilitybelt/utilitybelt.gitlab.io/-/package_files/278865008/download)
 

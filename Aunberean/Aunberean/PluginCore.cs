@@ -8,6 +8,7 @@ using System.Linq;
 using System.Numerics;
 using System.Reflection;
 using System.Text;
+using UtilityBelt.Scripting.Interop;
 using UtilityBelt.Service.Lib.Settings;
 
 namespace Aunberean
@@ -16,11 +17,13 @@ namespace Aunberean
     public class PluginCore : PluginBase
     {
         private static string _assemblyDirectory = null;
+        public readonly static Game Game = new();
         public VitalUI vitalUI;
         private OptionsUI optionsUI;
-        //public WindowUI windowUI ;
+        //public WindowUI windowUI;
         public KillTaskUI ktui;
-
+        //public TCblocker tcblocker;
+        public WhiteCursor whiteCursor;
         public Settings Settings;
 
         [Summary("Vital position X")]
@@ -52,6 +55,9 @@ namespace Aunberean
 
         [Summary("Mana Bar Color")]
         public Setting<uint> manaBarColor = new(0xFFd59300);
+
+        [Summary("Shared cooldown icons")]
+        public Setting<bool> vitalBarCooldowns = new(true);
 
         [Summary("Window Position 1")]
         public Setting<(int x,int y)> windowPosition1 = new((0,0));
@@ -86,6 +92,9 @@ namespace Aunberean
         [Summary("Kill Task Point")]
         public Setting<bool> ktPoint = new(true);
 
+        [Summary("Hide Kill Task Messages")]
+        public Setting<bool> ktHideMessages = new(false);
+
         [Summary("Filter cloak messages others")]
         public Setting<bool> filterCloakOther = new(true);
 
@@ -103,9 +112,34 @@ namespace Aunberean
 
         [Summary("Corpse Transparency Amount")]
         public Setting<float> corpseTransparencyAmount = new(.7f);
-        /// <summary>
-        /// Assembly directory containing the plugin dll
-        /// </summary>
+
+        [Summary("Blocker")]
+        public Setting<bool> blockerEnabled = new(true);
+
+        [Summary("Block giving inscibed items to the Town Crier")]
+        public Setting<bool> tcBlock = new(true);
+
+        [Summary("Block dropping items from inventory background")]
+        public Setting<bool> invBackgroundBlock = new(true);
+
+        [Summary("Block using items on weilded items")]
+        public Setting<bool> weildUseBlock = new(true);
+
+        [Summary("Block dropping weilded items")]
+        public Setting<bool> weildDropBlock = new(true);
+
+        //[Summary("Block dropping inscribed items")]
+        //public Setting<bool> inscibedDropBlock = new(false);
+
+        [Summary("Block using mana stones and tailor kits on inscribed items")]
+        public Setting<bool> inscibedUseBlock = new(true);
+
+        [Summary("Block salvaging inscribed items")]
+        public Setting<bool> inscibedSalvageBlock = new(true);
+
+        [Summary("Windows Cursors")]
+        public Setting<bool> whiteCursors = new(true);
+        
         public static string AssemblyDirectory
         {
             get
@@ -146,6 +180,8 @@ namespace Aunberean
                 //{
                 //    disableVitalBar();
                 //}
+
+                whiteCursor = new WhiteCursor(this);
                 if (CoreManager.Current.CharacterFilter.LoginStatus == 3)
                 {
                     Init();
@@ -191,10 +227,10 @@ namespace Aunberean
             CoreManager.Current.ChatBoxMessage += Current_ChatBoxMessage;
             CoreManager.Current.ContainerOpened += Current_ContainerOpened;
             optionsUI = new OptionsUI(this);
-            vitalUI = new VitalUI(this);
+            vitalUI = new VitalUI(this, Game);
             //windowUI = new WindowUI(this);
             ktui = new KillTaskUI(this);
-            
+            //tcblocker = new(this, Game);
         }
 
         public unsafe void disableVitalBar()
@@ -204,6 +240,7 @@ namespace Aunberean
             //SVIT = 0x100006D5,
             var playerSystem = CPlayerSystem.GetPlayerSystem();
             if (playerSystem == null) return;
+            
             if (playerSystem->playerModule.PlayerModule.GetOption(PlayerOption.SideBySideVitals_PlayerOption) == 1)
             {
                 var vit = CoreManager.Current.Actions.UIElementLookup((Decal.Adapter.Wrappers.UIElementType)0x100006D5);
@@ -211,7 +248,6 @@ namespace Aunberean
                 {
                     UIElement* ptr = (UIElement*)vit;
                     ptr->SetVisible((byte)(0));
-                    //ptr->SetVisible((byte)(ptr->IsVisible() == 1 ? 0 : 1));
                 }
             }
             else
@@ -221,7 +257,6 @@ namespace Aunberean
                 {
                     UIElement* ptr = (UIElement*)vit;
                     ptr->SetVisible((byte)(0));
-                    //ptr->SetVisible((byte)(ptr->IsVisible() == 1 ? 0 : 1));
                 }
             }
             
@@ -319,10 +354,13 @@ namespace Aunberean
                 CoreManager.Current.ChatBoxMessage -= Current_ChatBoxMessage;
                 CoreManager.Current.ContainerOpened -= Current_ContainerOpened;
                 // clean up our ui view
+                //tcblocker.Dispose();
+                whiteCursor.Dispose();
                 vitalUI.Dispose();
                 optionsUI.Dispose();
                 //windowUI.Dispose();
                 ktui.Dispose();
+
                 if (Settings != null)
                 {
                     if (Settings.NeedsSave)

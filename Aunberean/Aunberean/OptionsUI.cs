@@ -1,5 +1,6 @@
 ﻿using Decal.Adapter;
 using Decal.Adapter.Wrappers;
+using Decal.Interop.Core;
 using ImGuiNET;
 using Microsoft.Extensions.Options;
 using System;
@@ -66,6 +67,12 @@ namespace Aunberean
                         if (ImGui.Checkbox("Side by side", ref side))
                         {
                             _plugin.sideBySideStaminaMana.SetValue(side);
+                        }
+
+                        var vitalBarCooldowns = _plugin.vitalBarCooldowns.Value;
+                        if (ImGui.Checkbox("Shared cooldown icons", ref vitalBarCooldowns))
+                        {
+                            _plugin.vitalBarCooldowns.SetValue(vitalBarCooldowns);
                         }
 
                         //show buffs
@@ -239,6 +246,62 @@ namespace Aunberean
                                 _plugin.corpseTransparencyAmount.SetValue(corpseTransparencyAmount);
                             }
                         }
+
+                        //var blockerEnabled = _plugin.blockerEnabled.Value;
+                        //if (ImGui.Checkbox("Blocker", ref blockerEnabled))
+                        //{
+                        //    _plugin.blockerEnabled.SetValue(blockerEnabled);
+                        //}
+
+                        //if (blockerEnabled)
+                        //{
+                        //    ImGui.SetCursorPosX(ImGui.GetCursorPosX() + 10);
+                        //    ImGui.BeginGroup();
+                        //    var tcBlock = _plugin.tcBlock.Value;
+                        //    if (ImGui.Checkbox(_plugin.tcBlock.Summary, ref tcBlock))
+                        //    {
+                        //        _plugin.tcBlock.SetValue(tcBlock);
+                        //    }
+
+                        //    var invBackgroundBlock = _plugin.invBackgroundBlock.Value;
+                        //    if (ImGui.Checkbox(_plugin.invBackgroundBlock.Summary, ref invBackgroundBlock))
+                        //    {
+                        //        _plugin.invBackgroundBlock.SetValue(invBackgroundBlock);
+                        //    }
+
+                        //    var weildUseBlock = _plugin.weildUseBlock.Value;
+                        //    if (ImGui.Checkbox(_plugin.weildUseBlock.Summary, ref weildUseBlock))
+                        //    {
+                        //        _plugin.weildUseBlock.SetValue(weildUseBlock);
+                        //    }
+
+                        //    var weildDropBlock = _plugin.weildDropBlock.Value;
+                        //    if (ImGui.Checkbox(_plugin.weildDropBlock.Summary, ref weildDropBlock))
+                        //    {
+                        //        _plugin.weildDropBlock.SetValue(weildDropBlock);
+                        //    }
+
+                        //    var inscibedUseBlock = _plugin.inscibedUseBlock.Value;
+                        //    if (ImGui.Checkbox(_plugin.inscibedUseBlock.Summary, ref inscibedUseBlock))
+                        //    {
+                        //        _plugin.inscibedUseBlock.SetValue(inscibedUseBlock);
+                        //    }
+
+                        //    var inscibedSalvageBlock = _plugin.inscibedSalvageBlock.Value;
+                        //    if (ImGui.Checkbox(_plugin.inscibedSalvageBlock.Summary, ref inscibedSalvageBlock))
+                        //    {
+                        //        _plugin.inscibedSalvageBlock.SetValue(inscibedSalvageBlock);
+                        //    }
+                        //    ImGui.EndGroup();
+                        //}
+
+                        var whiteCursors = _plugin.whiteCursors.Value;
+                        if (ImGui.Checkbox("White Cursors (requires relog)", ref whiteCursors))
+                        {
+                            _plugin.whiteCursors.SetValue(whiteCursors);
+                        }
+                        //ImGui.SetItemTooltip(_plugin.xxx.Summary);
+                        
                         
 
                         ImGui.EndTabItem();
