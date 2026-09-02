@@ -208,7 +208,19 @@ namespace Aunberean
             {
                 return (point.X >= container.X && point.X <= container.X + container.Width && point.Y >= container.Y && point.Y <= container.Y + container.Height);
             }
+
+        public static string Pluralize(this string name)
+        {
+            if (name.EndsWith("us"))
+                return name + "s";
+            else if (name.EndsWith("ch") || name.EndsWith("s") || name.EndsWith("sh") || name.EndsWith("x") || name.EndsWith("z"))
+                return name + "es";
+            else if (name.EndsWith("th"))
+                return name;
+            else
+                return name + "s";
         }
+    }
     
 
 }

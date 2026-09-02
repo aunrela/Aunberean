@@ -1,0 +1,619 @@
+[
+{
+  "Area": "Hoshino",
+  "Name": "Golem Samurais",
+  "QuestFlagComplete": "killtaskgolemsamuraicompleted0812",
+  "QuestFlagCounts": "killtaskgolemsamurai0812",
+  "Current": 0,
+  "NPC": 46678,
+  "MobNames": [
+	"Bronze Golem Samurai",
+	"Clay Golem Samurai",
+	"Iron Golem Samurai"
+  ]
+},
+{
+  "Area": "Hoshino",
+  "Name": "Sarcophaguss",
+  "QuestFlagComplete": "sarcophaguskilltask",
+  "QuestFlagCounts": "sarcophaguskillcount",
+  "Current": 0,
+  "NPC": 52294,
+  "MobNames": ["Sarcophagus"]
+},
+{
+  "Area": "Hoshino",
+  "Name": "Spectral Archers",
+  "QuestFlagComplete": "killtaskspectralarcherscompleted0812",
+  "QuestFlagCounts": "killtaskspectralarchers0812",
+  "Current": 0,
+  "NPC": 46679,
+  "MobNames": ["Spectral Archer"]
+},
+{
+  "Area": "Hoshino",
+  "Name": "Spectral Bushis",
+  "QuestFlagComplete": "killtaskspectralbushicompleted0812",
+  "QuestFlagCounts": "killtaskspectralbushi0812",
+  "Current": 0,
+  "NPC": 46681,
+  "MobNames": ["Spectral Bushi"]
+},
+{
+  "Area": "Hoshino",
+  "Name": "Spectral Claws",
+  "QuestFlagComplete": "killtaskspectralclawsbladescompleted0812",
+  "QuestFlagCounts": "killtaskspectralclawsblades0812",
+  "Current": 0,
+  "NPC": 46682,
+  "MobNames": [
+	"Spectral Blade Adept",
+	"Spectral Blade Master",
+	"Spectral Claw Adept",
+	"Spectral Claw Master",
+	"Claw Master Gatekeeper"
+  ]
+},
+{
+  "Area": "Hoshino",
+  "Name": "Spectral Mages",
+  "QuestFlagComplete": "killtaskspectralbloodmagescompleted0812",
+  "QuestFlagCounts": "killtaskspectralbloodmages0812",
+  "Current": 0,
+  "NPC": 46680,
+  "MobNames": [
+	"Spectral Voidmage",
+	"Spectral Bloodmage"
+  ]
+},
+{
+  "Area": "Hoshino",
+  "Name": "Spectral Minions",
+  "QuestFlagComplete": "killtaskspectralminionscompleted0812",
+  "QuestFlagCounts": "killtaskspectralminions0812",
+  "Current": 0,
+  "NPC": 46683,
+  "MobNames": ["Spectral Minion"]
+},
+{
+  "Area": "Hoshino",
+  "Name": "Spectral Nanjou Shou-jens",
+  "QuestFlagComplete": "killtaskspectralninjascompleted0812",
+  "QuestFlagCounts": "killtaskspectralninjas0812",
+  "Current": 0,
+  "NPC": 46684,
+  "MobNames": ["Spectral Nanjou Shou-jen"]
+},
+{
+  "Area": "Hoshino",
+  "Name": "Spectral Samurais",
+  "QuestFlagComplete": "killtaskspectralsamuraicompleted0812",
+  "QuestFlagCounts": "killtaskspectralsamurai0812",
+  "Current": 0,
+  "NPC": 46686,
+  "MobNames": ["Spectral Samurai"]
+},
+{
+  "Area": "Tou-Tou",
+  "Name": "Grievver Shredders",
+  "QuestFlagComplete": "killtasktoutougrievverscompleted0812",
+  "QuestFlagCounts": "killtasktoutougrievvers0812",
+  "Current": 0,
+  "NPC": 46015,
+  "MobNames": ["Grievver Shredder"]
+},
+{
+  "Area": "Tou-Tou",
+  "Name": "Shadowy Pillars",
+  "QuestFlagComplete": "killtasktoutoupillarscompleted0812",
+  "QuestFlagCounts": "killtasktoutoupillars0812",
+  "Current": 0,
+  "NPC": 52272,
+  "MobNames": ["Shadowy Pillar"]
+},
+{
+  "Area": "Tou-Tou",
+  "Name": "Void Lords",
+  "QuestFlagComplete": "killtasktoutouknightscompleted0812",
+  "QuestFlagCounts": "killtasktoutouknights0812",
+  "Current": 0,
+  "NPC": 46018,
+  "MobNames": ["Void Lord"]
+},
+{
+  "Area": "Tou-Tou",
+  "Name": "Panumbris Shadows",
+  "QuestFlagComplete": "killtasktoutoushadowscompleted0812",
+  "QuestFlagCounts": "killtasktoutoushadows0812",
+  "Current": 0,
+  "NPC": 46017,
+  "MobNames": ["Panumbris Shadow"]
+},
+{
+  "Area": "Tou-Tou",
+  "Name": "Shadow Flyers",
+  "QuestFlagComplete": "killtasktoutouflyerscompleted0812",
+  "QuestFlagCounts": "killtasktoutouflyers0812",
+  "Current": 0,
+  "NPC": 46014,
+  "MobNames": ["Shadow Flyer"]
+},
+{
+  "Area": "Tou-Tou",
+  "Name": "Devourer Marguls",
+  "QuestFlagComplete": "killtasktoutoumargulscompleted0812",
+  "QuestFlagCounts": "killtasktoutoumarguls0812",
+  "Current": 0,
+  "NPC": 46016,
+  "MobNames": ["Devourer Margul"]
+},
+{
+  "Area": "Rynthid",
+  "Name": "Rynthid Sorcerers",
+  "QuestFlagComplete": "killtaskrynthidsorcerercompleted0813",
+  "QuestFlagCounts": "killtaskrynthidsorcerers0813",
+  "Current": 0,
+  "NPC": 51865,
+  "MobNames": [
+	"Rynthid Sorcerer",
+	"Raging Rynthid Sorcerer"
+  ]
+},
+{
+  "Area": "Rynthid",
+  "Name": "Rynthid Rifts",
+  "QuestFlagComplete": "killtaskrynthidriftcompleted0813",
+  "QuestFlagCounts": "killtaskrynthidrifts0813",
+  "Current": 0,
+  "NPC": 51866,
+  "MobNames": [
+	"Rift of Blind Rage",
+	"Rift of Consuming Torment",
+	"Rift of Torment",
+	"Rift of Rage"
+  ]
+},
+{
+  "Area": "Rynthid",
+  "Name": "Rynthid Minions",
+  "QuestFlagComplete": "killtaskrynthidminionscompleted0813",
+  "QuestFlagCounts": "killtaskrynthidminions0813",
+  "Current": 0,
+  "NPC": 51862,
+  "MobNames": [
+	"Rynthid Minion",
+	"Rynthid Minion of Rage"
+  ]
+},
+{
+  "Area": "Rynthid",
+  "Name": "Rynthid Slayers",
+  "QuestFlagComplete": "killtaskrynthidslayercompleted0813",
+  "QuestFlagCounts": "killtaskrynthidslayers0813",
+  "Current": 0,
+  "NPC": 51863,
+  "MobNames": ["Rynthid Slayer"]
+},
+{
+  "Area": "Rynthid",
+  "Name": "Rynthid Rare Boss",
+  "QuestFlagComplete": "killtaskrynthidrarescompleted0813",
+  "QuestFlagCounts": "killtaskrynthidrares0813",
+  "Current": 0,
+  "NPC": 51861,
+  "MobNames": [
+	"Rynthid Berserker",
+	"Rynthid Ravager",
+	"Aspect of Rage",
+	"Aspect of Torment"
+  ]
+},
+{
+  "Area": "Rynthid",
+  "Name": "Rynthid Empowered Wisps",
+  "QuestFlagComplete": "killtaskrynthidwispscompleted0813",
+  "QuestFlagCounts": "killtaskrynthidwisps0813",
+  "Current": 0,
+  "NPC": 51860,
+  "MobNames": [
+	"Empowered Sorrow Wisp",
+	"Empowered Hatred Wisp",
+	"Empowered Despair Wisp"
+  ]
+},
+{
+  "Area": "Rynthid",
+  "Name": "Rynthid Crystals",
+  "QuestFlagComplete": "killtaskrynthidcrystalswait",
+  "QuestFlagCounts": "killtaskrynthidcrystals",
+  "Current": 0,
+  "NPC": 52281,
+  "MobNames": ["Rynthid Crystal"]
+},
+{
+  "Area": "Rynthid",
+  "Name": "Rynthid Ragers",
+  "QuestFlagComplete": "killtaskrynthidragercompleted0813",
+  "QuestFlagCounts": "killtaskrynthidragers0813",
+  "Current": 0,
+  "NPC": 51864,
+  "MobNames": ["Rynthid Rager"]
+},
+{
+  "Area": "Graveyard",
+  "Name": "Graveyard Wisps",
+  "QuestFlagComplete": "killtaskgraveyardwispwait_1309",
+  "QuestFlagCounts": "killtaskgraveyardwisp_1309",
+  "Current": 0,
+  "NPC": 51955,
+  "MobNames": [
+	"Despair Wisp",
+	"Hatred Wisp",
+	"Sorrow Wisp"
+  ]
+},
+{
+  "Area": "Graveyard",
+  "Name": "Graveyard Skeletons",
+  "QuestFlagComplete": "killtaskgraveyardskeletonwait_1309",
+  "QuestFlagCounts": "killtaskgraveyardskeleton_1309",
+  "Current": 0,
+  "NPC": 51957,
+  "MobNames": [
+	"Pyre Minion",
+	"Pyre Skeleton",
+	"Pyre Champion"
+  ]
+},
+{
+  "Area": "Graveyard",
+  "Name": "Graveyard Wights",
+  "QuestFlagComplete": "killtaskgraveyardwightwait_1309",
+  "QuestFlagCounts": "killtaskgraveyardwight_1309",
+  "Current": 0,
+  "NPC": 51958,
+  "MobNames": [
+	"Wight",
+	"Wight Captain",
+	"Wight Blade Sorcerer"
+  ]
+},
+{
+  "Area": "Graveyard",
+  "Name": "Graveyard Spirits",
+  "QuestFlagComplete": "killtaskgraveyardspiritwait_1309",
+  "QuestFlagCounts": "killtaskgraveyardspirit_1309",
+  "Current": 0,
+  "NPC": 51956,
+  "MobNames": [
+	"Corrupted Dread",
+	"Spectral Dread"
+  ]
+},
+{
+  "Area": "Graveyard",
+  "Name": "Grave Rats",
+  "QuestFlagComplete": "killtaskgraveyardgraveratwait_1107",
+  "QuestFlagCounts": "killtaskgraveyardgraverat_1107",
+  "Current": 0,
+  "NPC": 36236,
+  "MobNames": ["Grave Rat"]
+},
+{
+  "Area": "Graveyard",
+  "Name": "Guardian Statues",
+  "QuestFlagComplete": "killtaskguardianstatuewait",
+  "QuestFlagCounts": "killtaskguardianstatue",
+  "Current": 0,
+  "NPC": 42030,
+  "MobNames": ["Guardian Statue"]
+},
+{
+  "Area": "Viridian Rise",
+  "Name": "Zefir Thorns",
+  "QuestFlagComplete": "killtaskviridianzefirwait",
+  "QuestFlagCounts": "killtaskviridianzefir",
+  "Current": 0,
+  "NPC": 53283,
+  "MobNames": [
+	"Zefir Thorn Poisoner",
+	"Zefir Thorn Ranger",
+	"Zefir Thorn Reaver",
+	"Zefir Thorn Stalker"
+  ]
+},
+{
+  "Area": "Viridian Rise",
+  "Name": "Brier Wasps",
+  "QuestFlagComplete": "killtaskviridianwaspwait",
+  "QuestFlagCounts": "killtaskviridianwasp",
+  "Current": 0,
+  "NPC": 53281,
+  "MobNames": [
+	"Brier Wasp Swarm",
+	"Poisonous Brier Wasp",
+	"Venomous Brier Wasp"
+  ]
+},
+{
+  "Area": "Viridian Rise",
+  "Name": "A'nekshens",
+  "QuestFlagComplete": "killtaskviridiananekwait",
+  "QuestFlagCounts": "killtaskviridiananek",
+  "Current": 0,
+  "NPC": 53280,
+  "MobNames": [
+	"A'nekshen Storm Caller",
+	"A'nekshen Storm Reaver",
+	"A'nekshen Thorn Dancer",
+	"A'nekshen Thorn Reaver",
+	"A'nekshen Tender",
+	"A'nekshen Caretaker"
+  ]
+},
+{
+  "Area": "Viridian Rise",
+  "Name": "NightBrier",
+  "QuestFlagComplete": "pickupnightbrieressence",
+  "QuestFlagCounts": "",
+  "Current": 0,
+  "NPC": 0,
+  "MobNames": []
+},
+{
+  "Area": "Viridian Rise",
+  "Name": "Wind Fury",
+  "QuestFlagComplete": "pickupwindfuryessence",
+  "QuestFlagCounts": "",
+  "Current": 0,
+  "NPC": 0,
+  "MobNames": []
+},
+{
+  "Area": "Viridian Rise",
+  "Name": "Norshuntyr",
+  "QuestFlagComplete": "pickupnorshuntyressence",
+  "QuestFlagCounts": "",
+  "Current": 0,
+  "NPC": 0,
+  "MobNames": []
+},
+{
+  "Area": "Viridian Rise",
+  "Name": "Zerzelikyr",
+  "QuestFlagComplete": "pickupzerzelikyressence",
+  "QuestFlagCounts": "",
+  "Current": 0,
+  "NPC": 0,
+  "MobNames": []
+},
+{
+  "Area": "Viridian Rise",
+  "Name": "Portal 1-2 Reward",
+  "QuestFlagComplete": "recivedrewardstatue1-2",
+  "QuestFlagCounts": "",
+  "Current": 8,
+  "NPC": 0,
+  "MobNames": []
+},
+{
+  "Area": "Viridian Rise",
+  "Name": "Portal 2-3 Reward",
+  "QuestFlagComplete": "recivedrewardstatue2-3",
+  "QuestFlagCounts": "",
+  "Current": 10,
+  "NPC": 0,
+  "MobNames": []
+},
+{
+  "Area": "Viridian Rise",
+  "Name": "Portal 3-4 Reward",
+  "QuestFlagComplete": "recivedrewardstatue3-4",
+  "QuestFlagCounts": "",
+  "Current": 12,
+  "NPC": 0,
+  "MobNames": []
+},
+{
+  "Area": "Viridian Rise",
+  "Name": "Portal 4-5 Reward",
+  "QuestFlagComplete": "recivedrewardstatue4-5",
+  "QuestFlagCounts": "",
+  "Current": 14,
+  "NPC": 0,
+  "MobNames": []
+},
+{
+  "Area": "Viridian Rise",
+  "Name": "Portal 5-6 Reward",
+  "QuestFlagComplete": "recivedrewardstatue5-6",
+  "QuestFlagCounts": "",
+  "Current": 16,
+  "NPC": 0,
+  "MobNames": []
+},
+{
+  "Area": "Viridian Rise",
+  "Name": "Portal 6-7 Reward",
+  "QuestFlagComplete": "recivedrewardstatue6-7",
+  "QuestFlagCounts": "",
+  "Current": 20,
+  "NPC": 0,
+  "MobNames": []
+},
+{
+  "Area": "Frozen Valley",
+  "Name": "Gurog Minions",
+  "QuestFlagComplete": "killtaskgurogminioncompleted1110",
+  "QuestFlagCounts": "killtaskgurogminion1110",
+  "Current": 0,
+  "NPC": 43495,
+  "MobNames": ["Gurog Minion"]
+},
+{
+  "Area": "Frozen Valley",
+  "Name": "Gurog Henchmans",
+  "QuestFlagComplete": "killtaskguroghenchmancompleted1110",
+  "QuestFlagCounts": "killtaskguroghenchman1110",
+  "Current": 0,
+  "NPC": 43495,
+  "MobNames": ["Gurog Henchman"]
+},
+{
+  "Area": "Frozen Valley",
+  "Name": "Gurog Soldiers",
+  "QuestFlagComplete": "killtaskgurogsoldiercompleted1110",
+  "QuestFlagCounts": "killtaskgurogsoldier1110",
+  "Current": 0,
+  "NPC": 43495,
+  "MobNames": ["Gurog Soldier"]
+},
+{
+  "Area": "Frozen Valley",
+  "Name": "Snow Tuskers",
+  "QuestFlagComplete": "snowtuskerkilltask",
+  "QuestFlagCounts": "snowtuskerkillcount",
+  "Current": 0,
+  "NPC": 43740,
+  "MobNames": ["Snow Tusker"]
+},
+{
+  "Area": "Frozen Valley",
+  "Name": "Snow Tusker Warriors",
+  "QuestFlagComplete": "snowtuskerkillwarriortask",
+  "QuestFlagCounts": "snowtuskerkillwarriorcount",
+  "Current": 0,
+  "NPC": 43740,
+  "MobNames": ["Snow Tusker Warrior"]
+},
+{
+  "Area": "Frozen Valley",
+  "Name": "Snow Tusker Leaders",
+  "QuestFlagComplete": "snowtuskerkillleadertask",
+  "QuestFlagCounts": "snowtuskerkillleadercount",
+  "Current": 0,
+  "NPC": 43740,
+  "MobNames": ["Snow Tusker Leader"]
+},
+{
+  "Area": "Frozen Valley",
+  "Name": "Frost Golems",
+  "QuestFlagComplete": "frostgolemkilltask",
+  "QuestFlagCounts": "frostgolemkillcount",
+  "Current": 0,
+  "NPC": 51959,
+  "MobNames": ["Frost Golem"]
+},
+{
+  "Area": "Frozen Valley",
+  "Name": "Frozen Dreads",
+  "QuestFlagComplete": "frozendreadkilltask",
+  "QuestFlagCounts": "frozendreadkillcount",
+  "Current": 0,
+  "NPC": 51960,
+  "MobNames": ["Frozen Dread"]
+},
+{
+  "Area": "Frozen Valley",
+  "Name": "Frozen Crystals",
+  "QuestFlagComplete": "frozencrystalkilltask",
+  "QuestFlagCounts": "frozencrystalkillcount",
+  "Current": 0,
+  "NPC": 52286,
+  "MobNames": ["Frozen Crystal"]
+},
+{
+  "Area": "Frozen Valley",
+  "Name": "Frozen Wights",
+  "QuestFlagComplete": "frozenwightkilltask",
+  "QuestFlagCounts": "frozenwightkillcount",
+  "Current": 0,
+  "NPC": 51961,
+  "MobNames": [
+	"Frozen Wight",
+	"Frozen Wight Sorcerer",
+	"Frozen Wight Captain",
+	"Frozen Wight Archer",
+	"Frozen Wight High Acolyte"
+  ]
+},
+{
+  "Area": "Neftet",
+  "Name": "Reedsharks",
+  "QuestFlagComplete": "killtaskdesertareareedsharkwait_0511",
+  "QuestFlagCounts": "killtaskdesertareareedshark_0511",
+  "Current": 0,
+  "NPC": 44263,
+  "MobNames": [
+	"War Reaper",
+	"Reedshark Seeker",
+	"Tamed Reaper",
+	"Reedshark Hunter",
+  ]
+},
+{
+  "Area": "Neftet",
+  "Name": "Mumiyahs",
+  "QuestFlagComplete": "killtaskdesertareamumiyahwait_0511",
+  "QuestFlagCounts": "killtaskdesertareamumiyah_0511",
+  "Current": 0,
+  "NPC": 44262,
+  "MobNames": [
+	"Mu-miyah Vizier",
+	"Mu-miyah Lord",
+	"Mu-miyah Soldier",
+	"Mu-miyah Champion",
+	"Mu-miyah Guardian",
+	"Mu-miyah Channeller",
+	"Mu-miyah Soothsayer",
+	"Mu-miyah Sentinel",
+	"Mu-miyah Grand Vizier",
+  ]
+},
+{
+  "Area": "Neftet",
+  "Name": "Golems",
+  "QuestFlagComplete": "killtaskdesertareagolemwait_0511",
+  "QuestFlagCounts": "killtaskdesertareagolem_0511",
+  "Current": 0,
+  "NPC": 44261,
+  "MobNames": [
+	"Burning Sands Golem",
+	"Dust Golem",
+  ]
+},
+{
+  "Area": "Neftet",
+  "Name": "Armoredillos",
+  "QuestFlagComplete": "killtaskdesertareaarmoredillowait_0511",
+  "QuestFlagCounts": "killtaskdesertareaarmoredillo_0511",
+  "Current": 0,
+  "NPC": 44260,
+  "MobNames": [
+	"War Armoredillo",
+	"Tamed Armoredillo",
+	"Guardian Armoredillo",
+  ]
+},
+{
+  "Area": "Neftet",
+  "Name": "Desert Cactuss",
+  "QuestFlagComplete": "desertcactuskilltask",
+  "QuestFlagCounts": "desertcactuskillcount",
+  "Current": 0,
+  "NPC": 52289,
+  "MobNames": ["Desert Cactus"]
+},
+{
+  "Area": "GK",
+  "Name": "Squires",
+  "QuestFlagComplete": "gearknightinvasionsquirekillwait_0513",
+  "QuestFlagCounts": "gearknightinvasionsquirekilltask_0513",
+  "Current": 0,
+  "NPC": 41545,
+  "MobNames": ["Invading Copper Cog Squire",
+  "Invading Iron Blade Squire",
+  "Invading Silver Scope Squire",
+  "Invading Bronze Gauntlet Squire"]
+}
+]

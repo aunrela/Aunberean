@@ -4,9 +4,11 @@ using ACE.Entity;
 using Decal.Adapter;
 using Decal.Adapter.Wrappers;
 using Decal.Filters;
+using Decal.Interop.Core;
 using ImGuiNET;
 using Microsoft.DirectX.Direct3D;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.Metrics;
@@ -39,12 +41,20 @@ namespace Aunberean
         private readonly Hud hud;
         private bool windowIsOpen;
 
+        internal static Settings KtSettings;
+
+        [Summary("Kill Task List")]
+        public KtSetting<List<KtQuest>> ktList = new(new());
+
+        [Summary("Force Save")]
+        public KtSetting<int> forceSave = new(0);
+
         ManagedTexture iconRedX = new ManagedTexture(0x11F8);
         ManagedTexture iconGreenCircle = new ManagedTexture(0x11F9);
         ManagedTexture iconGreenPlus;
         ManagedTexture iconGreenArrow = new ManagedTexture(0x11F7);
         ManagedTexture pointerArrow;
-        
+
         private Dictionary<int, (string Name, D3DObj D3DObj)> Shapes;
 
         Vector2 siz32 = new Vector2(32, 32);
@@ -63,94 +73,17 @@ namespace Aunberean
         string vrPortal = @"^Viridian Portal gives you\s+(\d+)\s+Infused Amber Shards\.";
         string vrEssence = @"^You receive the Essence of\s+(.+?)\.";
 
-
-        static Dictionary<string, string> ktdict = new Dictionary<string, string>
-        {
-            { "Pyre Minions", "Graveyard Skeletons" },
-            { "Pyre Skeletons", "Graveyard Skeletons" },
-            { "Pyre Champions", "Graveyard Skeletons" },
-            { "Wights", "Graveyard Wights" },
-            { "Wight Captains", "Graveyard Wights" },
-            { "Wight Blade Sorcerers", "Graveyard Wights" },
-            { "Despair Wisps", "Graveyard Wisps" },
-            { "Hatred Wisps", "Graveyard Wisps" },
-            { "Sorrow Wisps", "Graveyard Wisps" },
-            { "Corrupted Dreads", "Graveyard Spirits" },
-            { "Spectral Dreads", "Graveyard Spirits" },
-
-            { "Rift of Blind Rages", "Rynthid Rifts" },
-            { "Rift of Consuming Torments", "Rynthid Rifts" },
-            { "Rift of Torments", "Rynthid Rifts" },
-            { "Rift of Rages", "Rynthid Rifts" },
-            { "Rynthid Berserkers", "Rynthid Rare Boss" },
-            { "Rynthid Ravagers", "Rynthid Rare Boss" },
-            { "Aspect of Rages", "Rynthid Rare Boss" },
-            { "Aspect of Torments", "Rynthid Rare Boss" },
-            { "Empowered Sorrow Wisps", "Rynthid Empowered Wisps" },
-            { "Empowered Hatred Wisps", "Rynthid Empowered Wisps" },
-            { "Empowered Despair Wisps", "Rynthid Empowered Wisps" },
-            { "Rynthid Minion of Rages", "Rynthid Minions" },
-            { "Raging Rynthid Sorcerers", "Rynthid Sorcerers" },
-
-            { "Spectral Voidmages", "Spectral Mages" },
-            { "Spectral Bloodmages", "Spectral Mages" },
-            { "Spectral Blade Adepts", "Spectral Claws" },
-            { "Spectral Blade Masters", "Spectral Claws" },
-            { "Spectral Claw Adepts", "Spectral Claws" },
-            { "Spectral Claw Masters", "Spectral Claws" },
-            { "Bronze Golem Samurais", "Golem Samurais"},
-            { "Clay Golem Samurais", "Golem Samurais"},
-            { "Iron Golem Samurais", "Golem Samurais"},
-
-            { "Frozen Wight Sorcerers", "Frozen Wights" },
-            { "Frozen Wight Captains", "Frozen Wights" },
-            { "Frozen Wight Archers", "Frozen Wights" },
-
-            { "Zefir Thorn Poisoners", "Zefir Thorns"},
-            { "Zefir Thorn Rangers", "Zefir Thorns"},
-            { "Zefir Thorn Reavers", "Zefir Thorns"},
-            { "Zefir Thorn Stalkers", "Zefir Thorns"},
-            { "Brier Wasp Swarms", "Brier Wasps"},
-            { "Poisonous Brier Wasps", "Brier Wasps"},
-            { "Venomous Brier Wasps", "Brier Wasps"},
-            { "A'nekshen Storm Callers", "A'nekshens"},
-            { "A'nekshen Storm Reavers", "A'nekshens"},
-            { "A'nekshen Thorn Dancers", "A'nekshens"},
-            { "A'nekshen Thorn Reavers", "A'nekshens"},
-            { "A'nekshen Tenders", "A'nekshens"},
-            { "A'nekshen Caretaker", "A'nekshens"},
-
-            { "War Reapers", "Reedsharks"},
-            { "Reedshark Seekers", "Reedsharks"},
-            { "Tamed Reapers", "Reedsharks"},
-            { "Reedshark Hunters", "Reedsharks"},
-            { "reedsharks", "Reedsharks"},
-            { "Mu-miyah Viziers", "Mumiyahs"},
-            { "Mu-miyah Lords", "Mumiyahs"},
-            { "Mu-miyah Soldiers", "Mumiyahs"},
-            { "Mu-miyah Champions", "Mumiyahs"},
-            { "Mu-miyah Guardians", "Mumiyahs"},
-            { "Mu-miyah Channellers", "Mumiyahs"},
-            { "Mu-miyah Soothsayers", "Mumiyahs"},
-            { "Mu-miyah Sentinels", "Mumiyahs"},
-            { "Mu-miyah Grand Viziers", "Mumiyahs"},
-            { "mumiyahs", "Mumiyahs"},
-            { "Burning Sands Golems", "Golems"},
-            { "Dust Golems", "Golems"},
-            { "golems", "Golems"},
-            { "War Armoredillos", "Armoredillos"},
-            { "Tamed Armoredillos", "Armoredillos"},
-            { "Guardian Armoredillos", "Armoredillos"},
-            { "armoredillos", "Armoredillos"},
-
-        };
-
-        Dictionary<string, List<string>> reverseDict = ktdict
-            .GroupBy(x => x.Value)
-            .ToDictionary(g => g.Key, g => g.Select(x => x.Key).ToList());
-
         public KillTaskUI(PluginCore plugin)
         {
+            string documentsPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments);
+            var settingsPath = System.IO.Path.Combine(documentsPath, "Decal Plugins", "Aunberean", "KtSettings.json");
+
+            KtSettings = new Settings(this, settingsPath, (t) =>
+            {
+                return (t.SettingType == (SettingType)30);
+            });
+            KtSettings.Load();
+
             var assembly = Assembly.GetExecutingAssembly();
 
             string resourceName = assembly.GetManifestResourceNames().FirstOrDefault(n => n.EndsWith("060011FA.png", StringComparison.OrdinalIgnoreCase));
@@ -172,26 +105,39 @@ namespace Aunberean
 
 
             _plugin = plugin;
-            
+
             hud = UBService.Huds.CreateHud("Killtask Tracker");
             //hud.WindowSettings = ImGuiWindowFlags.NoNavFocus | ImGuiWindowFlags.NoNavInputs;
             hud.DontDrawDefaultWindow = true;
             hud.ShowInBar = true;
             hud.OnRender += Hud_OnRender;
 
-            KtQuest.Init();
+            KtQuest.Init(ktList.Value);
+
             QuestFlag.Init();
 
             CoreManager.Current.ChatBoxMessage += Current_ChatBoxMessage;
             CoreManager.Current.WorldFilter.CreateObject += WorldFilter_CreateObject;
             CoreManager.Current.WorldFilter.ReleaseObject += WorldFilter_ReleaseObject;
-            
+
+        }
+        public void saveList()
+        {
+            ktList.SetValue(KtQuest.KtQuests.ToList());
+            KtSettings.Save();
+        }
+        public void clearList()
+        {
+            ktList.SetValue(new List<KtQuest> { });
+            KtSettings.Save();
+            KtQuest.Init(ktList.Value);
+
         }
         private void Hud_OnRender(object sender, EventArgs e)
         {
             try
             {
-                
+
                 windowIsOpen = hud.Visible;
 
                 ImGui.SetNextWindowPos(new Vector2(_plugin.ktPosX.Value, _plugin.ktPosY.Value), ImGuiCond.FirstUseEver);
@@ -206,41 +152,21 @@ namespace Aunberean
 
                 if (ImGui.BeginTabBar("Kill Tasks"))
                 {
-                    if (ImGui.BeginTabItem("Hosh"))
+                    List<string> areas = KtQuest.KtQuests
+                        .Where(x => x.Enabled)
+                        .Select(q => q.Area)
+                        .Distinct()
+                        .ToList();
+
+                    foreach (var area in areas)
                     {
-                        drawTab("Hoshino");
-                        ImGui.EndTabItem();
+                        if (ImGui.BeginTabItem(area))
+                        {
+                            drawTab(area);
+                            ImGui.EndTabItem();
+                        }
                     }
-                    if (ImGui.BeginTabItem("Tou-Tou"))
-                    {
-                        drawTab("Tou-Tou");
-                        ImGui.EndTabItem();
-                    }
-                    if (ImGui.BeginTabItem("Rynthid"))
-                    {
-                        drawTab("Rynthid");
-                        ImGui.EndTabItem();
-                    }
-                    if (ImGui.BeginTabItem("Viridian"))
-                    {
-                        drawTab("Viridian Rise");
-                        ImGui.EndTabItem();
-                    }
-                    if (ImGui.BeginTabItem("Graveyard"))
-                    {
-                        drawTab("Graveyard");
-                        ImGui.EndTabItem();
-                    }
-                    if (ImGui.BeginTabItem("Frozen Valley"))
-                    {
-                        drawTab("Frozen Valley");
-                        ImGui.EndTabItem();
-                    }
-                    if (ImGui.BeginTabItem("Neftet"))
-                    {
-                        drawTab("Neftet");
-                        ImGui.EndTabItem();
-                    }
+
                     ImGui.EndTabBar();
                 }
                 if (ImGui.Button("Refresh"))
@@ -273,7 +199,7 @@ namespace Aunberean
 
         private void drawTab(string area)
         {
-            foreach (var kt in KtQuest.KtQuests.Where(x => x.Area == area))
+            foreach (var kt in KtQuest.KtQuests.Where(x => x.Area == area && x.Enabled))
             {
                 var pos = ImGui.GetCursorScreenPos();
                 bool point = _plugin.ktPoint.Value;
@@ -393,21 +319,13 @@ namespace Aunberean
             if (!_plugin.ktMark.Value) return;
             if (e.New.ObjectClass != Decal.Adapter.Wrappers.ObjectClass.Monster) return;
 
-            var result = KtQuest.KtQuests.Where(x => x.Active())
-                        .SelectMany(x =>
-                            reverseDict.ContainsKey(x.Name)
-                                ? reverseDict[x.Name].Append(x.Name)
-                                : new[] { x.Name }
-                        )
-                        .Distinct()
-                        .ToList();
-
-            if (!result.Contains(e.New.Name+"s")) return;
-
-            addShapeById(e.New.Id, e.New.Name);
+            if (KtQuest.KtQuests.Any(x => x.Enabled && x.Active() && x.MobNames.Contains(e.New.Name)))
+            {
+                addShapeById(e.New.Id, e.New.Name);
+            }
         }
 
-        private void addShapeById(int id,string name)
+        private void addShapeById(int id, string name)
         {
             if (!Shapes.ContainsKey(id))
             {
@@ -422,7 +340,8 @@ namespace Aunberean
                 .Where(x => x.Value.Name == mob)
                 .Select(x => x.Key)
                 .ToList();
-            foreach (var mobShapeKey in mobShapeKeys) {
+            foreach (var mobShapeKey in mobShapeKeys)
+            {
                 Shapes[mobShapeKey].D3DObj.Dispose();
                 Shapes.Remove(mobShapeKey);
             }
@@ -444,16 +363,7 @@ namespace Aunberean
         {
             foreach (var item in CoreManager.Current.WorldFilter.GetByObjectClass(Decal.Adapter.Wrappers.ObjectClass.Monster))
             {
-                var moblist = KtQuest.KtQuests.Where(x => x.Active())
-                        .SelectMany(x =>
-                            reverseDict.ContainsKey(x.Name)
-                                ? reverseDict[x.Name].Append(x.Name)
-                                : new[] { x.Name }
-                        )
-                        .Distinct()
-                        .ToList();
-
-                if (moblist.Contains(item.Name + "s"))
+                if (KtQuest.KtQuests.Any(x => x.Enabled && x.Active() && x.MobNames.Contains(item.Name)))
                 {
                     addShapeById(item.Id, item.Name);
                 }
@@ -463,12 +373,14 @@ namespace Aunberean
         private WorldObject selectClosestMob(string name)
         {
             List<string> list = new List<string>();
-            list.Add(name);
-            if (reverseDict.ContainsKey(name))
+
+            var quest = KtQuest.KtQuests.FirstOrDefault(x => x.Name == name);
+
+            if (quest != null)
             {
-                list.AddRange(reverseDict[name]);
-            }           
-                
+                list.AddRange(quest.MobNames);
+            }
+
             WorldObject wo = GetClosestObject(list, Decal.Adapter.Wrappers.ObjectClass.Monster);
             if (wo == null) return null;
             return wo;
@@ -480,7 +392,7 @@ namespace Aunberean
 
             foreach (WorldObject obj in CoreManager.Current.WorldFilter.GetByObjectClass(objectClass))
             {
-                if (!objectName.Contains(obj.Name+"s"))  continue;
+                if (!objectName.Contains(obj.Name)) continue;
 
                 if (closest == null || GetDistanceFromPlayer(obj) < GetDistanceFromPlayer(closest))
                     closest = obj;
@@ -507,13 +419,14 @@ namespace Aunberean
         public void SelectNPC(int type)
         {
             int id = GetNPC(type);
-            if(id != 0)
+            if (id != 0)
             {
                 CoreManager.Current.Actions.SelectItem(id);
             }
         }
 
-        public int GetNPC(int type) {
+        public int GetNPC(int type)
+        {
             foreach (WorldObject obj in CoreManager.Current.WorldFilter.GetByObjectClass(Decal.Adapter.Wrappers.ObjectClass.Npc))
             {
                 if (obj.Type == type) return obj.Id;
@@ -536,7 +449,7 @@ namespace Aunberean
             if (double.IsNaN(angleRad) || double.IsInfinity(angleRad))
                 return;
             var drawList = ImGui.GetWindowDrawList();
-            
+
             var _uv0 = uv0 ?? new Vector2(0f, 0f);
             var _uv1 = uv1 ?? new Vector2(1f, 1f);
 
@@ -597,29 +510,22 @@ namespace Aunberean
                     if (match.Success)
                     {
                         int count = int.Parse(match.Groups[1].Value);
-                        string name = match.Groups[2].Value;
-                        name = ktdict.TryGetValue(name, out var value) ? value : name;
+                        string pluralName = match.Groups[2].Value;
 
-                        int index2 = KtQuest.KtQuests.FindIndex(x => x.Name == name);
+                        var quest = KtQuest.KtQuests
+                        .FirstOrDefault(q => q.MobNames.Any(m =>
+                            m.Pluralize().Equals(pluralName, StringComparison.OrdinalIgnoreCase)));
 
-                        if (index2 >= 0)
+                        if (quest != null)
                         {
-                            KtQuest.KtQuests[index2].UpdateSolves(count);
+                            quest.UpdateSolves(count);
+
+                            foreach (var mob in quest.MobNames)
+                            {
+                                deleteShapesByMob(mob);
+                            }
                         }
 
-
-                        List<string> mobs = new List<string>();
-                        mobs.Add(name);
-                        if (reverseDict.ContainsKey(name))
-                        {
-                            mobs.AddRange(reverseDict[name]);
-                        }
-                        
-                        foreach(var mob in mobs)
-                        {
-                            string minuss = mob.Substring(0, mob.Length - 1);
-                            deleteShapesByMob(minuss);
-                        }
                         //if(_plugin.ktHideMessages.Value) e.Eat = true;
                     }
                 }
@@ -632,16 +538,20 @@ namespace Aunberean
                     if (match.Success)
                     {
                         int firstNumber = int.Parse(match.Groups[1].Value);
-                        string name = match.Groups[2].Value;
-                        name = ktdict.TryGetValue(name, out var value) ? value : name;
+
+                        string pluralName = match.Groups[2].Value;
+
+                        var quest = KtQuest.KtQuests
+                        .FirstOrDefault(q => q.MobNames.Any(m =>
+                            m.Pluralize().Equals(pluralName, StringComparison.OrdinalIgnoreCase)));
+
+                        if (quest != null)
+                        {
+                            quest.UpdateSolves(firstNumber);
+                        }
+
                         int lastNumber = int.Parse(match.Groups[3].Value);
 
-                        int index2 = KtQuest.KtQuests.FindIndex(x => x.Name == name);
-
-                        if (index2 >= 0)
-                        {
-                            KtQuest.KtQuests[index2].UpdateSolves(firstNumber);
-                        }
                         //if (_plugin.ktHideMessages.Value) e.Eat = true;
                     }
                 }
@@ -657,20 +567,22 @@ namespace Aunberean
                     if (match.Success)
                     {
                         int firstNumber = int.Parse(match.Groups[1].Value);
-                        string name = match.Groups[3].Value;
-                        name = ktdict.TryGetValue(name, out var value) ? value : name;
+                        string pluralName = match.Groups[3].Value;
+
                         int lastNumber = int.Parse(match.Groups[2].Value);
 
-                        int index2 = KtQuest.KtQuests.FindIndex(x => x.Name == name);
+                        var quest = KtQuest.KtQuests
+                        .FirstOrDefault(q => q.MobNames.Any(m =>
+                            m.Pluralize().Equals(pluralName, StringComparison.OrdinalIgnoreCase)));
 
-                        if (index2 >= 0)
+                        if (quest != null)
                         {
-                            KtQuest.KtQuests[index2].UpdateSolves(firstNumber);
+                            quest.UpdateSolves(firstNumber);
                         }
                         //if (_plugin.ktHideMessages.Value) e.Eat = true;
                     }
                 }
-                
+
                 if (e.Text.StartsWith("Viridian Portal gives you ") && e.Text.Trim().EndsWith(" Infused Amber Shards."))
                 {
                     Match match = Regex.Match(e.Text, vrPortal);
@@ -678,7 +590,7 @@ namespace Aunberean
                     if (match.Success)
                     {
                         int count = int.Parse(match.Groups[1].Value);
-                                                
+
                         int index2 = KtQuest.KtQuests.FindIndex(x => x.Name.StartsWith("Portal") && x.Current == int.Parse(match.Groups[1].Value));
 
                         if (index2 >= 0)
@@ -696,7 +608,7 @@ namespace Aunberean
                     if (match.Success)
                     {
                         string name = match.Groups[1].Value;
-                        
+
                         int index2 = KtQuest.KtQuests.FindIndex(x => x.Name == name);
 
                         if (index2 >= 0)
@@ -723,7 +635,13 @@ namespace Aunberean
         {
             deleteAllShapes();
             hud.Dispose();
-
+            if (KtSettings != null)
+            {
+                if (KtSettings.NeedsSave)
+                {
+                    KtSettings.Save();
+                }
+            }
             CoreManager.Current.ChatBoxMessage -= Current_ChatBoxMessage;
             CoreManager.Current.WorldFilter.CreateObject -= WorldFilter_CreateObject;
             CoreManager.Current.WorldFilter.ReleaseObject -= WorldFilter_ReleaseObject;

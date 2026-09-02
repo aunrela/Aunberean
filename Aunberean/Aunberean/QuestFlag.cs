@@ -17,7 +17,7 @@ namespace Aunberean
         public static readonly Regex KillTaskRegex = new Regex(@"(killtask|killcount|slayerquest|totalgolem.*dead|(kills$))");
 
         // Quest Flags I care to track
-        public static readonly List<string> QuestFlagsToTrack = new List<string> 
+        public static List<string> QuestFlagsToTrack = new List<string> 
             { "legendaryquestsa", "legendaryquestsb", "legendaryquestsc" }
             .Concat(KtQuest.KtQuests.Select(q => q.QuestFlagCounts))
             .Concat(KtQuest.KtQuests.Select(q => q.QuestFlagComplete))
@@ -41,6 +41,11 @@ namespace Aunberean
         public static void Init()
         {
             QuestFlags.Clear();
+            QuestFlagsToTrack = new List<string> 
+            { "legendaryquestsa", "legendaryquestsb", "legendaryquestsc" }
+            .Concat(KtQuest.KtQuests.Select(q => q.QuestFlagCounts))
+            .Concat(KtQuest.KtQuests.Select(q => q.QuestFlagComplete))
+            .ToList();
 
             QuestsChanged = true;
             MyQuestsRan = false;

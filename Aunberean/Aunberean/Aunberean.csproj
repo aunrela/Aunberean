@@ -26,9 +26,9 @@
     <None Remove="Resources\06004D75mod.png" />
     <None Remove="Resources\06004D75new.png" />
     <None Remove="Resources\arrow-up-inv.png" />
+    <None Remove="Resources\defaultKTQuests.json" />
     <None Remove="Resources\greenAetheria.png" />
     <None Remove="Resources\hashmarks.png" />
-    <None Remove="Resources\ktquests.csv" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="D3DService">
@@ -62,9 +62,9 @@
     <EmbeddedResource Include="Resources\06004D75mod.png" />
     <EmbeddedResource Include="Resources\06004D75new.png" />
     <EmbeddedResource Include="Resources\arrow-up-inv.png" />
+    <EmbeddedResource Include="Resources\defaultKTQuests.json" />
     <EmbeddedResource Include="Resources\greenAetheria.png" />
     <EmbeddedResource Include="Resources\hashmarks.png" />
-    <EmbeddedResource Include="Resources\ktquests.csv" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Decal.Adapter">

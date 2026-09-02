@@ -3,6 +3,7 @@ using Decal.Adapter.Wrappers;
 using Decal.Interop.Core;
 using ImGuiNET;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using System;
 using System.Numerics;
 using UtilityBelt.Service;
@@ -18,10 +19,13 @@ namespace Aunberean
         private readonly Hud hud;
         int windowPosition1x;
         int windowPosition1y;
-
+        string export = "";
         static bool ktEnable = true;
         static bool ktMark = true;
         static bool ktPoint = true;
+        static bool buffEditor = false;
+        static bool debuffEditor = false;
+        static bool ktEditor = false;
 
         string TestText = "";
         public OptionsUI(PluginCore plugin)
@@ -75,8 +79,26 @@ namespace Aunberean
                             _plugin.vitalBarCooldowns.SetValue(vitalBarCooldowns);
                         }
 
-                        //show buffs
-                        //show debuffs
+                        if(ImGui.Checkbox("Show Buff Whitelist Editor", ref buffEditor))
+                        {
+
+                        }
+
+                        if (buffEditor)
+                        {
+                            SpellEditor.DrawSpellEditor(_plugin.trackedBuffs.Value);
+                        }
+
+                        if (ImGui.Checkbox("Show Debuff Blacklist Editor", ref debuffEditor))
+                        {
+
+                        }
+
+                        if (debuffEditor)
+                        {
+                            SpellEditor.DrawSpellEditor(_plugin.debuffBlacklist.Value);
+                        }
+
                         ImGui.EndTabItem();
                     }
                     //if (ImGui.BeginTabItem("Window Position"))
@@ -188,6 +210,16 @@ namespace Aunberean
                         {
                             _plugin.ktPoint.SetValue(ktPoint);
                         }
+
+                        ImGui.Checkbox("Show Kill Task Editor", ref ktEditor);
+
+                        if (ktEditor)
+                        {
+                            KtQuestEditor.Draw();
+
+                        }
+
+
 
                         //if (ImGui.Button("Mark existing"))
                         //{

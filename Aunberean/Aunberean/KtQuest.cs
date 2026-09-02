@@ -2,6 +2,7 @@
 using Decal.Adapter.Wrappers;
 using Decal.Filters;
 using ImGuiNET;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -18,7 +19,6 @@ namespace Aunberean
 {
     public class KtQuest
     {
-        // Collection of JohnQuests loaded from johnquests.csv
         public static List<KtQuest> KtQuests = new List<KtQuest>();
 
         // Properties
@@ -26,54 +26,39 @@ namespace Aunberean
         public string Name = "";
         public string QuestFlagComplete = "";
         public string QuestFlagCounts = "";
+        public string QuestGreenText = "";
         public int Current = 0;
-        public int Max = 0;
-        public string Url = "";
-        public string Hint = "";
         public int NPC = 0;
+        public List<string> MobNames = new List<string>();
+        public bool Enabled = true;
 
-        public static void Init()
+        public static void Init(List<KtQuest> ktQuests)
         {
             KtQuests.Clear();
-            LoadKtQuestsCSV();
+            if (ktQuests.Count != 0)
+            {
+                KtQuests = ktQuests;
+            }
+            else {
+                LoadKtQuests();
+            }
+                
         }
 
-        public static void LoadKtQuestsCSV()
+        public static void LoadKtQuests()
         {
             var quests = new List<KtQuest>();
 
             var assembly = Assembly.GetExecutingAssembly();
 
-            string resourceName = assembly.GetManifestResourceNames().FirstOrDefault(n => n.EndsWith("ktquests.csv", StringComparison.OrdinalIgnoreCase));
-            if(resourceName == null) throw new FileNotFoundException("Embedded resource ktuests.csv not found.");
-
+            string resourceName = assembly.GetManifestResourceNames().FirstOrDefault(n => n.EndsWith("defaultKTQuests.json", StringComparison.OrdinalIgnoreCase));
+            if(resourceName == null) throw new FileNotFoundException("Embedded resource defaultKTQuests.json not found.");
+            
             using (var stream = assembly.GetManifestResourceStream(resourceName))
             using (var reader = new StreamReader(stream))
             {
-                string headerLine = reader.ReadLine();
-                if(headerLine == null) throw new InvalidDataException("CSV file is empty.");
-
-                // Assume columns: Name,BitMask,LegendaryQuestsFlag,QuestFlag,Url,Hint
-                while (!reader.EndOfStream)
-                {
-                    string line = reader.ReadLine();
-                    if (string.IsNullOrWhiteSpace(line)) continue;
-
-                    var fields = line.Split(',');
-
-                    quests.Add(new KtQuest
-                    {
-                        Area = fields[0].Trim(),
-                        Name = fields[1].Trim(),
-                        QuestFlagComplete = fields[2].Trim().ToLower(),
-                        QuestFlagCounts = fields[3].Trim().ToLower(),
-                        Current = int.Parse(fields[4].Trim()),
-                        Max = int.Parse(fields[5].Trim()),
-                        Url = fields[6].Trim(),
-                        //Hint = fields[7].Trim(),
-                        NPC = string.IsNullOrEmpty(fields[7].Trim()) ? 0 : int.Parse(fields[7].Trim())
-                    });
-                }
+                string json = reader.ReadToEnd();
+                quests = JsonConvert.DeserializeObject<List<KtQuest>>(json) ?? new List<KtQuest>(); ;
             }
 
             KtQuests.AddRange(quests);
