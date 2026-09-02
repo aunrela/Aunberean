@@ -19,7 +19,6 @@ namespace Aunberean
         private readonly Hud hud;
         int windowPosition1x;
         int windowPosition1y;
-        string export = "";
         static bool ktEnable = true;
         static bool ktMark = true;
         static bool ktPoint = true;

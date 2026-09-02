@@ -221,9 +221,6 @@ namespace Aunberean
         [Summary("Kill Task Point")]
         public Setting<bool> ktPoint = new(true);
 
-        //[Summary("Kill Task List")]
-        //public Setting<List<KtQuest>> ktList = new();
-
         [Summary("Hide Kill Task Messages")]
         public Setting<bool> ktHideMessages = new(false);
 

@@ -12,7 +12,7 @@ Written by Aun.
 
 [Decal](https://decaldev.com/) 2.9.8.3 required.
 
-Download the latest installer:  [Download Aunberean](https://github.com/aunrela/Aunberean/releases/download/V0.0.3.0/AunbereanInstaller-0.0.3.exe)
+Download the latest installer:  [Download Aunberean](https://github.com/aunrela/Aunberean/releases/download/V0.0.4.0/AunbereanInstaller-0.0.4.exe)
 
 Download this updated beta UtilityBelt: [UtilityBelt](https://gitlab.com/utilitybelt/utilitybelt.gitlab.io/-/package_files/278865008/download)
 
@@ -58,12 +58,22 @@ Points to closest mob and marks mobs needed with a green arrow.
 
 Clicking on the mob name selects the closest mob if the task is in progress, or selects the NPC if the quest is ready for turn in or not started.
 
+## Cursor Replacements
+
+![Cursors](./docs/cursors.png)
+
+Replaces the games cursors with white versions.
+
 ## Corpse Transparency 
 
 ![Corpse Before](./docs/corpsebefore.png)
 ![Corpse After](./docs/corpseafter.png)
 
 Makes corpses that have been opened slightly transparent. Level of transparency settable all the way to invisible
+
+## Chat Filters
+
+Filters for cloak and aetheria procs are available in the options menu.
 
 ## Options
 
@@ -73,9 +83,12 @@ This plugin is made using [UtilityBelt.Service](https://gitlab.com/utilitybelt/u
 
 Click the O for the options and K for the kill task tracker.
 
-## Chat Filters
+### New in Version 0.0.4
 
-Filters for cloak and aetheria procs are available in the options menu.
+Editor to add and remove kill tasks.
+
+![kt editor](./docs/kteditor.png)
+
 
 ## Huge Thanks to
 

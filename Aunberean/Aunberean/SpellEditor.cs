@@ -66,7 +66,7 @@ namespace Aunberean
             }
             ImGui.EndChild();
             ImGui.SameLine();
-            //ImGui.Separator();
+
             ImGui.BeginChild(
             "Search Spells",
             new Vector2(300, 500));

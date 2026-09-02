@@ -603,17 +603,5 @@
   "Current": 0,
   "NPC": 52289,
   "MobNames": ["Desert Cactus"]
-},
-{
-  "Area": "GK",
-  "Name": "Squires",
-  "QuestFlagComplete": "gearknightinvasionsquirekillwait_0513",
-  "QuestFlagCounts": "gearknightinvasionsquirekilltask_0513",
-  "Current": 0,
-  "NPC": 41545,
-  "MobNames": ["Invading Copper Cog Squire",
-  "Invading Iron Blade Squire",
-  "Invading Silver Scope Squire",
-  "Invading Bronze Gauntlet Squire"]
 }
 ]
