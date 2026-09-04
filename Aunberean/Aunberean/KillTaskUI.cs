@@ -101,15 +101,27 @@ namespace Aunberean
             {
                 pointerArrow = new ManagedTexture(stream);
             }
-            Shapes = new Dictionary<int, (string Name, D3DObj D3DObj)>();
 
+            ManagedTexture icon;
+            resourceName = assembly.GetManifestResourceNames().FirstOrDefault(n => n.EndsWith("kticon.png", StringComparison.OrdinalIgnoreCase));
+            if (resourceName == null) throw new FileNotFoundException("Embedded resource kticon.png not found.");
+
+            using (var stream = assembly.GetManifestResourceStream(resourceName))
+            {
+                icon = new ManagedTexture(stream);
+            }
+
+
+            Shapes = new Dictionary<int, (string Name, D3DObj D3DObj)>();
 
             _plugin = plugin;
 
-            hud = UBService.Huds.CreateHud("Killtask Tracker");
+            //var icon = new ManagedTexture(0x2bac).Bitmap;
+            hud = UBService.Huds.CreateHud("Killtask Tracker", icon.Bitmap);
             //hud.WindowSettings = ImGuiWindowFlags.NoNavFocus | ImGuiWindowFlags.NoNavInputs;
             hud.DontDrawDefaultWindow = true;
             hud.ShowInBar = true;
+            hud.Visible = _plugin.ktvisible.Value;
             hud.OnRender += Hud_OnRender;
 
             KtQuest.Init(ktList.Value);
@@ -633,6 +645,7 @@ namespace Aunberean
         }
         public void Dispose()
         {
+            _plugin.ktvisible.SetValue(hud.Visible);
             deleteAllShapes();
             hud.Dispose();
             if (KtSettings != null)

@@ -6,7 +6,7 @@
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
     <OutputPath>..\bin\</OutputPath>
     <PlatformTarget>x86</PlatformTarget>
-    <Version>0.0.4</Version>
+    <Version>0.0.5</Version>
     <LangVersion>12</LangVersion>
     <GenerateAssemblyInfo>True</GenerateAssemblyInfo>
     <ProjectGuid>b36b9980-6cf8-4ea9-b324-eb161b301e49</ProjectGuid>
@@ -16,6 +16,8 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Resources\060011FA.png" />
+    <None Remove="Resources\06002646.png" />
+    <None Remove="Resources\06002860.png" />
     <None Remove="Resources\06004D68new.png" />
     <None Remove="Resources\06004D69new.png" />
     <None Remove="Resources\06004D71new.png" />
@@ -25,10 +27,10 @@
     <None Remove="Resources\06004D74new.png" />
     <None Remove="Resources\06004D75mod.png" />
     <None Remove="Resources\06004D75new.png" />
-    <None Remove="Resources\arrow-up-inv.png" />
     <None Remove="Resources\defaultKTQuests.json" />
     <None Remove="Resources\greenAetheria.png" />
     <None Remove="Resources\hashmarks.png" />
+    <None Remove="Resources\kticon.png" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="D3DService">
@@ -52,6 +54,8 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\060011FA.png" />
+    <EmbeddedResource Include="Resources\06002646.png" />
+    <EmbeddedResource Include="Resources\06002860.png" />
     <EmbeddedResource Include="Resources\06004D68new.png" />
     <EmbeddedResource Include="Resources\06004D69new.png" />
     <EmbeddedResource Include="Resources\06004D71new.png" />
@@ -65,6 +69,7 @@
     <EmbeddedResource Include="Resources\defaultKTQuests.json" />
     <EmbeddedResource Include="Resources\greenAetheria.png" />
     <EmbeddedResource Include="Resources\hashmarks.png" />
+    <EmbeddedResource Include="Resources\kticon.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Decal.Adapter">
@@ -82,13 +87,16 @@
     <Reference Include="Microsoft.DirectX.Direct3D">
       <HintPath>..\deps\Microsoft.DirectX.Direct3D.dll</HintPath>
     </Reference>
+    <Reference Include="VirindiHotkeySystem">
+      <HintPath>..\deps\VirindiHotkeySystem.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="NSIS-Tool" Version="3.0.8">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="UtilityBelt.Service" Version="3.0.14">
+    <PackageReference Include="UtilityBelt.Service" Version="3.0.15">
       <ExcludeAssets>runtime; build;</ExcludeAssets>
     </PackageReference>
   </ItemGroup>

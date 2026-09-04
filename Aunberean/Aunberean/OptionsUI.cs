@@ -5,7 +5,10 @@ using ImGuiNET;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System;
+using System.IO;
+using System.Linq;
 using System.Numerics;
+using System.Reflection;
 using UtilityBelt.Service;
 using UtilityBelt.Service.Views;
 using static Aunberean.WindowUI;
@@ -31,7 +34,21 @@ namespace Aunberean
         {
             _plugin = plugin;
 
-            hud = UBService.Huds.CreateHud("Options for Aunberean");
+            ManagedTexture icon;
+            var assembly = Assembly.GetExecutingAssembly();
+
+
+
+            string resourceName = assembly.GetManifestResourceNames().FirstOrDefault(n => n.EndsWith("06002646.png", StringComparison.OrdinalIgnoreCase));
+
+            if (resourceName == null) throw new FileNotFoundException("Embedded resource 06002646.png not found.");
+
+            using (var stream = assembly.GetManifestResourceStream(resourceName))
+            {
+                icon = new ManagedTexture(stream);
+            }
+
+            hud = UBService.Huds.CreateHud("Options for Aunberean", icon.Bitmap); //1f0a
             hud.ShowInBar = true;
             hud.OnRender += Hud_OnRender;
             hud.WindowSettings = ImGuiWindowFlags.AlwaysAutoResize;
@@ -331,9 +348,23 @@ namespace Aunberean
                         {
                             _plugin.whiteCursors.SetValue(whiteCursors);
                         }
-                        //ImGui.SetItemTooltip(_plugin.xxx.Summary);
-                        
-                        
+
+                        //var perCharacterHealKit = _plugin.perCharacterHealKit.Value;
+                        //if (ImGui.Checkbox("Per character heal kit settings", ref perCharacterHealKit))
+                        //{
+                        //    _plugin.perCharacterHealKit.SetValue(perCharacterHealKit);
+                        //    _plugin.healKitUI.Dispose();
+                        //    OneTouchHeal.HealKits.Clear();
+                        //    //_plugin.healKitUI = null;
+                        //    _plugin.healKitUI = new HealKitUI(_plugin);
+                        //}
+
+                        var hideHealKitIcon = _plugin.hideHealKitIcon.Value;
+                        if (ImGui.Checkbox("Hide heal kit icon", ref hideHealKitIcon))
+                        {
+                            _plugin.hideHealKitIcon.SetValue(hideHealKitIcon);
+                            _plugin.healKitUI.ShowInBar(!hideHealKitIcon);
+                        }
 
                         ImGui.EndTabItem();
                     }

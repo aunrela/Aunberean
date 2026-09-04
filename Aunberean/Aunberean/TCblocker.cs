@@ -80,16 +80,16 @@ namespace Aunberean
                 {
                     CoreManager.Current?.Actions?.AddChatText($"[Aunberean] Blocked salvage of unappraised item.", 5);
                     var re = _game.Actions.ObjectAppraise(itemWo.Id);
-                    re.OnFinished += Re_OnFinished;
+                    //re.OnFinished += Re_OnFinished;
                     return false;
                 }
                 if (itemWo.HasValue(StringId.Inscription) && itemWo.Value(StringId.Inscription) != "")
                 {
                     CoreManager.Current?.Actions?.AddChatText($"[Aunberean] Blocked salvage of inscribed item.", 5);
-                    itemWo.StringValues.Remove(StringId.Inscription);
-                    tcTempBlock = true;
-                    var re = _game.Actions.ObjectAppraise(itemWo.Id);
-                    re.OnFinished += Re_OnFinished;
+                    //itemWo.StringValues.Remove(StringId.Inscription);
+                    //tcTempBlock = true;
+                    //var re = _game.Actions.ObjectAppraise(itemWo.Id);
+                    //re.OnFinished += Re_OnFinished;
                     return false;
                 }
 
@@ -124,16 +124,16 @@ namespace Aunberean
                 {
                     CoreManager.Current?.Actions?.AddChatText($"[Aunberean] Blocked salvage of unappraised item.", 5);
                     var re = _game.Actions.ObjectAppraise(itemWo.Id);
-                    re.OnFinished += Re_OnFinished;
+                    //re.OnFinished += Re_OnFinished;
                     return false;
                 }
                 if (itemWo.HasValue(StringId.Inscription) && itemWo.Value(StringId.Inscription) != "")
                 {
                     CoreManager.Current?.Actions?.AddChatText($"[Aunberean] Blocked salvage of inscribed item.", 5);
-                    itemWo.StringValues.Remove(StringId.Inscription);
-                    tcTempBlock = true;
-                    var re = _game.Actions.ObjectAppraise(itemWo.Id);
-                    re.OnFinished += Re_OnFinished;
+                    //itemWo.StringValues.Remove(StringId.Inscription);
+                    //tcTempBlock = true;
+                    //var re = _game.Actions.ObjectAppraise(itemWo.Id);
+                    //re.OnFinished += Re_OnFinished;
                     return false;
                 }
                 //CoreManager.Current?.Actions?.AddChatText($"[Aunberean] saw 2 " + itemWo.Name, 5);
@@ -221,16 +221,16 @@ namespace Aunberean
                             {
                                 CoreManager.Current?.Actions?.AddChatText($"[Aunberean] Blocked use, item not appraised.", 5);
                                 var re = _game.Actions.ObjectAppraise(itemWo.Id);
-                                re.OnFinished += Re_OnFinished;
+                                //re.OnFinished += Re_OnFinished;
                                 return;
                             }
                             if (itemWo.HasValue(StringId.Inscription) && itemWo.Value(StringId.Inscription) != "")
                             {
                                 CoreManager.Current?.Actions?.AddChatText($"[Aunberean] Blocked use, item has insciption.", 5);
-                                itemWo.StringValues.Remove(StringId.Inscription);
-                                tcTempBlock = true;
-                                var re = _game.Actions.ObjectAppraise(itemWo.Id);
-                                re.OnFinished += Re_OnFinished;
+                                //itemWo.StringValues.Remove(StringId.Inscription);
+                                //tcTempBlock = true;
+                                //var re = _game.Actions.ObjectAppraise(itemWo.Id);
+                                //re.OnFinished += Re_OnFinished;
                                 return;
                             }
                         }
@@ -376,16 +376,16 @@ namespace Aunberean
                         {
                             CoreManager.Current?.Actions?.AddChatText($"[Aunberean] Blocked give of unappraised item.", 5);
                             var re = _game.Actions.ObjectAppraise(itemWo.Id);
-                            re.OnFinished += Re_OnFinished;
+                            //re.OnFinished += Re_OnFinished;
                             return 0;
                         }
                         if (itemWo.HasValue(StringId.Inscription) && itemWo.Value(StringId.Inscription) != "")
                         {
                             CoreManager.Current?.Actions?.AddChatText($"[Aunberean] Blocked give of inscribed item.", 5);
-                            itemWo.StringValues.Remove(StringId.Inscription);
-                            tcTempBlock = true;
-                            var re = _game.Actions.ObjectAppraise(itemWo.Id);
-                            re.OnFinished += Re_OnFinished;
+                            //itemWo.StringValues.Remove(StringId.Inscription);
+                            //tcTempBlock = true;
+                            //var re = _game.Actions.ObjectAppraise(itemWo.Id);
+                            //re.OnFinished += Re_OnFinished;
                             return 0;
                         }
                     }
@@ -400,12 +400,12 @@ namespace Aunberean
             }
         }
 
-        private void Re_OnFinished(object sender, EventArgs e)
-        {
+        //private void Re_OnFinished(object sender, EventArgs e)
+        //{
 
-            CoreManager.Current?.Actions?.AddChatText($"[Aunberean] Finished appraisal.", 5);
-            tcTempBlock = false;
-        }
+        //    CoreManager.Current?.Actions?.AddChatText($"[Aunberean] Finished appraisal.", 5);
+        //    tcTempBlock = false;
+        //}
 
         [StructLayout(LayoutKind.Sequential)]
         public struct POINT

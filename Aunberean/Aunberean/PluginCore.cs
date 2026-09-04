@@ -18,11 +18,12 @@ namespace Aunberean
     {
         private static string _assemblyDirectory = null;
         public static PluginCore _plugin;
-        public readonly static Game Game = new();
+        public readonly static Game game = new();
         public VitalUI vitalUI;
         private OptionsUI optionsUI;
         //public WindowUI windowUI;
         public KillTaskUI ktui;
+        public HealKitUI healKitUI;
         //public TCblocker tcblocker;
         public WhiteCursor whiteCursor;
         public Settings Settings;
@@ -212,6 +213,9 @@ namespace Aunberean
         [Summary("Kill Task size Y")]
         public Setting<int> ktSizeY = new(100);
 
+        [Summary("Kill Task visible")]
+        public Setting<bool> ktvisible = new(false);
+
         [Summary("Kill Task Tracker")]
         public Setting<bool> ktEnable = new(true);
 
@@ -269,7 +273,13 @@ namespace Aunberean
         [Summary("Windows Cursors")]
         public Setting<bool> whiteCursors = new(true);
 
-        
+        //[Summary("Per Character Heal Kit Settings")]
+        //public Setting<bool> perCharacterHealKit = new(false);
+
+        [Summary("Hide Heal Kit Icon")]
+        public Setting<bool> hideHealKitIcon = new(false);
+
+
         public static string AssemblyDirectory
         {
             get
@@ -358,9 +368,10 @@ namespace Aunberean
             CoreManager.Current.ChatBoxMessage += Current_ChatBoxMessage;
             CoreManager.Current.ContainerOpened += Current_ContainerOpened;
             optionsUI = new OptionsUI(this);
-            vitalUI = new VitalUI(this, Game);
+            vitalUI = new VitalUI(this, game);
             //windowUI = new WindowUI(this);
             ktui = new KillTaskUI(this);
+            healKitUI = new HealKitUI(this);
             //tcblocker = new(this, Game);
         }
 
@@ -491,6 +502,7 @@ namespace Aunberean
                 optionsUI.Dispose();
                 //windowUI.Dispose();
                 ktui.Dispose();
+                healKitUI.Dispose();
 
                 if (Settings != null)
                 {

@@ -12,7 +12,7 @@ Written by Aun.
 
 [Decal](https://decaldev.com/) 2.9.8.3 required.
 
-Download the latest installer:  [Download Aunberean](https://github.com/aunrela/Aunberean/releases/download/V0.0.4.0/AunbereanInstaller-0.0.4.exe)
+Download the latest installer:  [Download Aunberean](https://github.com/aunrela/Aunberean/releases/download/V0.0.5.0/AunbereanInstaller-0.0.5.exe)
 
 Download this updated beta UtilityBelt: [UtilityBelt](https://gitlab.com/utilitybelt/utilitybelt.gitlab.io/-/package_files/278865008/download)
 
@@ -70,6 +70,22 @@ Replaces the games cursors with white versions.
 ![Corpse After](./docs/corpseafter.png)
 
 Makes corpses that have been opened slightly transparent. Level of transparency settable all the way to invisible
+
+## Heal Kit -  New in Version 0.0.5
+
+![Heal Kit](./docs/healkits.png)
+
+Bind a hotkey in Virindi Hotkey System
+
+When the hotkey is pressed this will check from the top of the list down. Each heal kits chance of success is calculated based on your missing HP and healing skill. If that calculated chance is higher than the setting in the "Chance of Success" column that heal kit will be used on yourself. If it isn't higher it will continue down the list. If it gets to a food or potion item it will check if its off cool-down and use it or skip it.
+
+You should keep at least one kit at the bottom of the list set to 0% chance of success so it will always try to use it if it gets to the bottom.
+
+Missing HP at Chance - Is the amount of hp missing that would calculate as the current chance of success.
+
+Amount Healed - Is the amount that kit can heal for based on your current skill.
+
+Current Heal Chance - Is your chance of success right now with each kit.
 
 ## Chat Filters
 

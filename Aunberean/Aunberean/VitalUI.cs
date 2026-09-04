@@ -30,12 +30,13 @@ using Hud = UtilityBelt.Service.Views.Hud;
 using Palette = ACE.DatLoader.FileTypes.Palette;
 using SpellTable = Decal.Filters.SpellTable;
 using Vector4 = System.Numerics.Vector4;
+using static Aunberean.IconHelpers;
 
 namespace Aunberean
 {
     public class VitalUI : IDisposable
     {
-        private Game Game;
+        private Game game;
         private readonly Hud hud;
         PluginCore _plugin;
 
@@ -74,7 +75,7 @@ namespace Aunberean
         public VitalUI(PluginCore plugin, Game game)
         {
             _plugin = plugin;
-            Game = game;
+            this.game = game;
 
             var assembly = Assembly.GetExecutingAssembly();
 
@@ -191,7 +192,7 @@ namespace Aunberean
                 //    //spell;
                 //}
                 
-                var activeEnchantments = Game.Character.ActiveEnchantments();
+                var activeEnchantments = game.Character.ActiveEnchantments();
 
                 enchantmentTime = GetUnixTime();
 
@@ -224,11 +225,11 @@ namespace Aunberean
 
                 if (_plugin.vitalBarCooldowns.Value)
                 {
-                    foreach (var cooldown in Game.Character.SharedCooldowns())
+                    foreach (var cooldown in game.Character.SharedCooldowns())
                     {
                         uint iconid = 0;
                         if (cooldown.Id == 213) iconid = 29728;
-                        var itemWo = Game.World.Get(cooldown.ObjectId);
+                        var itemWo = game.World.Get(cooldown.ObjectId);
                         if (itemWo != null)
                         {
                             iconid = itemWo.Value(DataId.Icon);
@@ -423,9 +424,9 @@ namespace Aunberean
 
         public (int current, int max, double divisor, string maxDisplay) GetVital(VitalId type)
         {
-            var max = (double)Game.Character.Weenie.Vitals[type].Max;
+            var max = (double)game.Character.Weenie.Vitals[type].Max;
             var maxDisplay = max;
-            var current = Game.Character.Weenie.Vitals[type].Current;
+            var current = game.Character.Weenie.Vitals[type].Current;
             var div = GetVitalNegativeMultiplierModifier(type);
             var sub = GetVitalNegativeAdditiveModifier(type);
             var add = GetVitalPositiveAdditiveModifier(type);
@@ -450,7 +451,7 @@ namespace Aunberean
         public float GetVitalNegativeMultiplierModifier(VitalId type)
         {
             float num = 1f;
-            foreach (UtilityBelt.Scripting.Interop.Enchantment item in from e in Game.Character.GetActiveEnchantments(type)
+            foreach (UtilityBelt.Scripting.Interop.Enchantment item in from e in game.Character.GetActiveEnchantments(type)
                                                                        where (e.Flags & EnchantmentFlags.Multiplicative) != 0
                                                                        && e.StatValue < 1.0f
                                                                        select e)
@@ -464,7 +465,7 @@ namespace Aunberean
         public float GetVitalPositiveMultiplierModifier(VitalId type)
         {
             float num = 1f;
-            foreach (UtilityBelt.Scripting.Interop.Enchantment item in from e in Game.Character.GetActiveEnchantments(type)
+            foreach (UtilityBelt.Scripting.Interop.Enchantment item in from e in game.Character.GetActiveEnchantments(type)
                                                                        where (e.Flags & EnchantmentFlags.Multiplicative) != 0
                                                                        && e.StatValue > 1.0f
                                                                        select e)
@@ -477,7 +478,7 @@ namespace Aunberean
 
         public int GetVitalNegativeAdditiveModifier(VitalId type)
         {
-            return (from e in Game.Character.GetActiveEnchantments(type)
+            return (from e in game.Character.GetActiveEnchantments(type)
                     where (e.Flags & EnchantmentFlags.Additive) != 0
                     && e.StatValue < 0.0f
                     select e).Sum((UtilityBelt.Scripting.Interop.Enchantment e) => (int)e.StatValue);
@@ -485,7 +486,7 @@ namespace Aunberean
 
         public int GetVitalPositiveAdditiveModifier(VitalId type)
         {
-            return (from e in Game.Character.GetActiveEnchantments(type)
+            return (from e in game.Character.GetActiveEnchantments(type)
                     where (e.Flags & EnchantmentFlags.Additive) != 0
                     && e.StatValue > 0.0f
                     select e).Sum((UtilityBelt.Scripting.Interop.Enchantment e) => (int)e.StatValue);
@@ -536,9 +537,13 @@ namespace Aunberean
                     ImGui.Image(icons[IconId].TexturePtr, size3232);
                 }
             }
+            string text = "";
+            if (TimeRemaining > 0)
+            {
+                TimeSpan t = TimeSpan.FromSeconds(TimeRemaining);
+                text = $"{(int)t.TotalMinutes}:{t.Seconds:D2}";
+            } 
 
-            TimeSpan t = TimeSpan.FromSeconds(TimeRemaining);
-            string text = $"{(int)t.TotalMinutes}:{t.Seconds:D2}";
             var textSize = ImGui.CalcTextSize(text);
 
             // Get current X so we can offset within the group
@@ -1073,21 +1078,6 @@ namespace Aunberean
             drawList.AddText(textPos, 0xFFFFFFFF, text);
 
         }
-        void ReplaceWhite(Bitmap bmp, Color newColor)
-        {
-            for (int y = 0; y < bmp.Height; y++)
-            {
-                for (int x = 0; x < bmp.Width; x++)
-                {
-                    Color pixel = bmp.GetPixel(x, y);
-
-                    if (pixel.R > 240 && pixel.G > 240 && pixel.B > 240)
-                    {
-                        bmp.SetPixel(x, y, Color.FromArgb(pixel.A, newColor));
-                    }
-                }
-            }
-        }
 
         public static int LevelFromSpellDifficulty(int difficulty)
         {
@@ -1149,131 +1139,6 @@ namespace Aunberean
                 default:
                     return 5110;
             }
-        }
-
-        private Bitmap GetBitmap(ACE.DatLoader.FileTypes.Texture texture)
-        {
-            Bitmap bitmap = new Bitmap(texture.Width, texture.Height);
-            List<int> imageColorArray = texture.GetImageColorArray();
-            switch (texture.Format)
-            {
-                case SurfacePixelFormat.PFID_R8G8B8:
-                case SurfacePixelFormat.PFID_CUSTOM_LSCAPE_R8G8B8:
-                    {
-                        for (int num7 = 0; num7 < texture.Height; num7++)
-                        {
-                            for (int num8 = 0; num8 < texture.Width; num8++)
-                            {
-                                int index4 = num7 * texture.Width + num8;
-                                int red6 = (imageColorArray[index4] & 0xFF0000) >> 16;
-                                int green6 = (imageColorArray[index4] & 0xFF00) >> 8;
-                                int blue6 = imageColorArray[index4] & 0xFF;
-                                bitmap.SetPixel(num8, num7, Color.FromArgb(red6, green6, blue6));
-                            }
-                        }
-
-                        break;
-                    }
-                case SurfacePixelFormat.PFID_A8R8G8B8:
-                    {
-                        for (int num3 = 0; num3 < texture.Height; num3++)
-                        {
-                            for (int num4 = 0; num4 < texture.Width; num4++)
-                            {
-                                int index2 = num3 * texture.Width + num4;
-                                int alpha3 = (int)((imageColorArray[index2] & 0xFF000000u) >> 24);
-                                int red4 = (imageColorArray[index2] & 0xFF0000) >> 16;
-                                int green4 = (imageColorArray[index2] & 0xFF00) >> 8;
-                                int blue4 = imageColorArray[index2] & 0xFF;
-                                bitmap.SetPixel(num4, num3, Color.FromArgb(alpha3, red4, green4, blue4));
-                            }
-                        }
-
-                        break;
-                    }
-                case SurfacePixelFormat.PFID_P8:
-                case SurfacePixelFormat.PFID_INDEX16:
-                    {
-                        Palette palette = UBService.PortalDat.ReadFromDat<Palette>(texture.DefaultPaletteId.Value);
-                        if (texture.CustomPaletteColors.Count > 0)
-                        {
-                            foreach (KeyValuePair<int, uint> customPaletteColor in texture.CustomPaletteColors)
-                            {
-                                if (customPaletteColor.Key <= palette.Colors.Count)
-                                {
-                                    palette.Colors[customPaletteColor.Key] = customPaletteColor.Value;
-                                }
-                            }
-                        }
-
-                        for (int k = 0; k < texture.Height; k++)
-                        {
-                            for (int l = 0; l < texture.Width; l++)
-                            {
-                                int index = k * texture.Width + l;
-                                int alpha2 = (int)((palette.Colors[imageColorArray[index]] & 0xFF000000u) >> 24);
-                                int red2 = (int)(palette.Colors[imageColorArray[index]] & 0xFF0000) >> 16;
-                                int green2 = (int)(palette.Colors[imageColorArray[index]] & 0xFF00) >> 8;
-                                int blue2 = (int)(palette.Colors[imageColorArray[index]] & 0xFF);
-                                bitmap.SetPixel(l, k, Color.FromArgb(alpha2, red2, green2, blue2));
-                            }
-                        }
-
-                        break;
-                    }
-                case SurfacePixelFormat.PFID_A8:
-                case SurfacePixelFormat.PFID_CUSTOM_LSCAPE_ALPHA:
-                    {
-                        for (int num5 = 0; num5 < texture.Height; num5++)
-                        {
-                            for (int num6 = 0; num6 < texture.Width; num6++)
-                            {
-                                int index3 = num5 * texture.Width + num6;
-                                int red5 = imageColorArray[index3];
-                                int green5 = imageColorArray[index3];
-                                int blue5 = imageColorArray[index3];
-                                bitmap.SetPixel(num6, num5, Color.FromArgb(red5, green5, blue5));
-                            }
-                        }
-
-                        break;
-                    }
-                case SurfacePixelFormat.PFID_R5G6B5:
-                    {
-                        for (int m = 0; m < texture.Height; m++)
-                        {
-                            for (int n = 0; n < texture.Width; n++)
-                            {
-                                int num2 = 3 * (m * texture.Width + n);
-                                int red3 = imageColorArray[num2];
-                                int green3 = imageColorArray[num2 + 1];
-                                int blue3 = imageColorArray[num2 + 2];
-                                bitmap.SetPixel(n, m, Color.FromArgb(red3, green3, blue3));
-                            }
-                        }
-
-                        break;
-                    }
-                case SurfacePixelFormat.PFID_A4R4G4B4:
-                    {
-                        for (int i = 0; i < texture.Height; i++)
-                        {
-                            for (int j = 0; j < texture.Width; j++)
-                            {
-                                int num = 4 * (i * texture.Width + j);
-                                int alpha = imageColorArray[num];
-                                int red = imageColorArray[num + 1];
-                                int green = imageColorArray[num + 2];
-                                int blue = imageColorArray[num + 3];
-                                bitmap.SetPixel(j, i, Color.FromArgb(alpha, red, green, blue));
-                            }
-                        }
-
-                        break;
-                    }
-            }
-
-            return bitmap;
         }
 
         public void setVisibility(bool visibility)
